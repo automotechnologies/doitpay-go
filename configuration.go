@@ -89,8 +89,8 @@ func NewConfiguration() *Configuration {
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
-				URL:         "http://localhost:8000",
-				Description: "No description provided",
+				URL:         "https://api.doitpay.co",
+				Description: "Doitpay API Server",
 			},
 		},
 		OperationServers: map[string]ServerConfigurations{},
