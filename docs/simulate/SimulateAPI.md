@@ -32,12 +32,12 @@ func main() {
     doitpayClient := doitpay.NewAPIClient("API-KEY")
 
     accountNumber := "12345678"
- paymentIdentifier := "sample payment identifier"
+	paymentIdentifier := "sample payment identifier"
 
- request := simulate.InternalWebControllersMerchantApiv1SimulateSimulateRequest{ // [REQUIRED]
-  AccountNumber: &accountNumber,
-  PaymentIdentifier: &paymentIdentifier,
- }
+	request := simulate.InternalWebControllersMerchantApiv1SimulateSimulateRequest{ // [REQUIRED]
+		AccountNumber: &accountNumber,
+		PaymentIdentifier: &paymentIdentifier,
+	}
 
     doitpayClient := doitpay.NewAPIClient("API-KEY")
 

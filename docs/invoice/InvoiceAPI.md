@@ -38,106 +38,106 @@ func main() {
     doitpayClient := doitpay.NewClient("API-KEY")
 
     amount := float32(100.50)
- amountCurrency := "USD"
- country := "US"
- addresses := "123 Main St"
- city := "Springfield"
- customerCountry := "US"
- customerRefId := "CUST12345"
- email := "john.doe@example.com"
- name := "John Doe"
- customerNotes := "Preferred customer"
- phone := "555-555-5555"
- postalCode := int32(62704)
+	amountCurrency := "USD"
+	country := "US"
+	addresses := "123 Main St"
+	city := "Springfield"
+	customerCountry := "US"
+	customerRefId := "CUST12345"
+	email := "john.doe@example.com"
+	name := "John Doe"
+	customerNotes := "Preferred customer"
+	phone := "555-555-5555"
+	postalCode := int32(62704)
 
- customer := &invoice.InternalWebControllersMerchantApiv1InvoiceCustomer{ // [OPTIONAL]
-  Addresses:     &addresses,
-  City:          &city,
-  Country:       &customerCountry,
-  CustomerRefId: &customerRefId,
-  Email:         &email,
-  Name:          &name,
-  Notes:         &customerNotes,
-  Phone:         &phone,
-  PostalCode:    &postalCode,
- }
+	customer := &invoice.InternalWebControllersMerchantApiv1InvoiceCustomer{ // [OPTIONAL]
+		Addresses:     &addresses,
+		City:          &city,
+		Country:       &customerCountry,
+		CustomerRefId: &customerRefId,
+		Email:         &email,
+		Name:          &name,
+		Notes:         &customerNotes,
+		Phone:         &phone,
+		PostalCode:    &postalCode,
+	}
 
- customerNotification := []string{"email", "sms"}
- externalId := "EXT12345"
- sku1 := "SKU123"
- itemName1 := "Item1"
- itemNotes1 := "This is a test item"
- price1 := float32(20.00)
- quantity1 := int32(2)
+	customerNotification := []string{"email", "sms"}
+	externalId := "EXT12345"
+	sku1 := "SKU123"
+	itemName1 := "Item1"
+	itemNotes1 := "This is a test item"
+	price1 := float32(20.00)
+	quantity1 := int32(2)
 
- item1 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
-  SKU:      &sku1,
-  Name:     &itemName1,
-  Notes:    &itemNotes1,
-  Price:    &price1,
-  Quantity: &quantity1,
- }
+	item1 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
+		SKU:      &sku1,
+		Name:     &itemName1,
+		Notes:    &itemNotes1,
+		Price:    &price1,
+		Quantity: &quantity1,
+	}
 
- sku2 := "SKU456"
- itemName2 := "Item2"
- itemNotes2 := "This is another test item"
- price2 := float32(15.00)
- quantity2 := int32(3)
+	sku2 := "SKU456"
+	itemName2 := "Item2"
+	itemNotes2 := "This is another test item"
+	price2 := float32(15.00)
+	quantity2 := int32(3)
 
- item2 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
-  SKU:      &sku2,
-  Name:     &itemName2,
-  Notes:    &itemNotes2,
-  Price:    &price2,
-  Quantity: &quantity2,
- }
+	item2 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
+		SKU:      &sku2,
+		Name:     &itemName2,
+		Notes:    &itemNotes2,
+		Price:    &price2,
+		Quantity: &quantity2,
+	}
 
- items := []invoice.InternalWebControllersMerchantApiv1InvoiceItem{item1, item2}
+	items := []invoice.InternalWebControllersMerchantApiv1InvoiceItem{item1, item2}
 
- notes := "Thank you for your business."
- code := "PM123"
- status := "active"
- paymentType := "credit_card"
+	notes := "Thank you for your business."
+	code := "PM123"
+	status := "active"
+	paymentType := "credit_card"
 
- paymentMethod := invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{
-  Code:   &code,
-  Status: &status,
-  Type:   &paymentType,
- }
+	paymentMethod := invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{
+		Code:   &code,
+		Status: &status,
+		Type:   &paymentType,
+	}
 
- paymentMethods := []invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{paymentMethod}
+	paymentMethods := []invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{paymentMethod}
 
- cancelUrl := "https://example.com/cancel"
- successUrl := "https://example.com/success"
+	cancelUrl := "https://example.com/cancel"
+	successUrl := "https://example.com/success"
 
- redirectUrl := &invoice.InternalWebControllersMerchantApiv1InvoiceRedirectURL{
-  Cancel:  &cancelUrl,
-  Success: &successUrl,
- }
+	redirectUrl := &invoice.InternalWebControllersMerchantApiv1InvoiceRedirectURL{
+		Cancel:  &cancelUrl,
+		Success: &successUrl,
+	}
 
- timeBegin := "2023-10-25T12:00:00Z" // [OPTIONAL]
- timeEnd := "2023-10-25T18:00:00Z" // [OPTIONAL]
+	timeBegin := "2023-10-25T12:00:00Z" // [OPTIONAL]
+	timeEnd := "2023-10-25T18:00:00Z" // [OPTIONAL]
 
- request := invoice.InternalWebControllersMerchantApiv1InvoiceInvoiceRequest{
-  Amount:               &amount,
-  AmountCurrency:       &amountCurrency,
-  Country:              &country,
-  Customer:             customer,
-  CustomerNotification: customerNotification,
-  ExternalId:           &externalId,
-  Items:                items,
-  Notes:                &notes,
-  PaymentMethods:       paymentMethods,
-  RedirectUrl:          redirectUrl,
-  TimeBegin:            &timeBegin,
-  TimeEnd:              &timeEnd,
- }
+	request := invoice.InternalWebControllersMerchantApiv1InvoiceInvoiceRequest{
+		Amount:               &amount,
+		AmountCurrency:       &amountCurrency,
+		Country:              &country,
+		Customer:             customer,
+		CustomerNotification: customerNotification,
+		ExternalId:           &externalId,
+		Items:                items,
+		Notes:                &notes,
+		PaymentMethods:       paymentMethods,
+		RedirectUrl:          redirectUrl,
+		TimeBegin:            &timeBegin,
+		TimeEnd:              &timeEnd,
+	}
 
- resp, r, err := doitpayClient.InvoiceAPI.CreateInvoice(context.Background()).Request(request).Execute()
- if err != nil {
-  fmt.Fprintf(os.Stderr, "Error when calling `InvoiceAPI.CreateInvoice``: %v\n", err)
+	resp, r, err := doitpayClient.InvoiceAPI.CreateInvoice(context.Background()).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `InvoiceAPI.CreateInvoice``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
- }
+	}
 
     // response from `CreateInvoice`
     fmt.Fprintf(os.Stdout, "Response from `InvoiceAPI.CreateInvoice`: %v\n", resp)
@@ -520,100 +520,100 @@ func main() {
     invoiceID := "123" // string | invoice id to update
 
     amount := float32(100.50)
- amountCurrency := "USD"
- country := "US"
- addresses := "123 Main St"
- city := "Springfield"
- customerCountry := "US"
- customerRefId := "CUST12345"
- email := "john.doe@example.com"
- name := "John Doe"
- customerNotes := "Preferred customer"
- phone := "555-555-5555"
- postalCode := int32(62704)
+	amountCurrency := "USD"
+	country := "US"
+	addresses := "123 Main St"
+	city := "Springfield"
+	customerCountry := "US"
+	customerRefId := "CUST12345"
+	email := "john.doe@example.com"
+	name := "John Doe"
+	customerNotes := "Preferred customer"
+	phone := "555-555-5555"
+	postalCode := int32(62704)
 
- customer := &invoice.InternalWebControllersMerchantApiv1InvoiceCustomer{ // [OPTIONAL]
-  Addresses:     &addresses,
-  City:          &city,
-  Country:       &customerCountry,
-  CustomerRefId: &customerRefId,
-  Email:         &email,
-  Name:          &name,
-  Notes:         &customerNotes,
-  Phone:         &phone,
-  PostalCode:    &postalCode,
- }
+	customer := &invoice.InternalWebControllersMerchantApiv1InvoiceCustomer{ // [OPTIONAL]
+		Addresses:     &addresses,
+		City:          &city,
+		Country:       &customerCountry,
+		CustomerRefId: &customerRefId,
+		Email:         &email,
+		Name:          &name,
+		Notes:         &customerNotes,
+		Phone:         &phone,
+		PostalCode:    &postalCode,
+	}
 
- customerNotification := []string{"email", "sms"}
- externalId := "EXT12345"
- sku1 := "SKU123"
- itemName1 := "Item1"
- itemNotes1 := "This is a test item"
- price1 := float32(20.00)
- quantity1 := int32(2)
+	customerNotification := []string{"email", "sms"}
+	externalId := "EXT12345"
+	sku1 := "SKU123"
+	itemName1 := "Item1"
+	itemNotes1 := "This is a test item"
+	price1 := float32(20.00)
+	quantity1 := int32(2)
 
- item1 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
-  SKU:      &sku1,
-  Name:     &itemName1,
-  Notes:    &itemNotes1,
-  Price:    &price1,
-  Quantity: &quantity1,
- }
+	item1 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
+		SKU:      &sku1,
+		Name:     &itemName1,
+		Notes:    &itemNotes1,
+		Price:    &price1,
+		Quantity: &quantity1,
+	}
 
- sku2 := "SKU456"
- itemName2 := "Item2"
- itemNotes2 := "This is another test item"
- price2 := float32(15.00)
- quantity2 := int32(3)
+	sku2 := "SKU456"
+	itemName2 := "Item2"
+	itemNotes2 := "This is another test item"
+	price2 := float32(15.00)
+	quantity2 := int32(3)
 
- item2 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
-  SKU:      &sku2,
-  Name:     &itemName2,
-  Notes:    &itemNotes2,
-  Price:    &price2,
-  Quantity: &quantity2,
- }
+	item2 := invoice.InternalWebControllersMerchantApiv1InvoiceItem{
+		SKU:      &sku2,
+		Name:     &itemName2,
+		Notes:    &itemNotes2,
+		Price:    &price2,
+		Quantity: &quantity2,
+	}
 
- items := []invoice.InternalWebControllersMerchantApiv1InvoiceItem{item1, item2}
+	items := []invoice.InternalWebControllersMerchantApiv1InvoiceItem{item1, item2}
 
- notes := "Thank you for your business."
- code := "PM123"
- status := "active"
- paymentType := "credit_card"
+	notes := "Thank you for your business."
+	code := "PM123"
+	status := "active"
+	paymentType := "credit_card"
 
- paymentMethod := invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{
-  Code:   &code,
-  Status: &status,
-  Type:   &paymentType,
- }
+	paymentMethod := invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{
+		Code:   &code,
+		Status: &status,
+		Type:   &paymentType,
+	}
 
- paymentMethods := []invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{paymentMethod}
+	paymentMethods := []invoice.InternalWebControllersMerchantApiv1InvoicePaymentMethod{paymentMethod}
 
- cancelUrl := "https://example.com/cancel"
- successUrl := "https://example.com/success"
+	cancelUrl := "https://example.com/cancel"
+	successUrl := "https://example.com/success"
 
- redirectUrl := &invoice.InternalWebControllersMerchantApiv1InvoiceRedirectURL{
-  Cancel:  &cancelUrl,
-  Success: &successUrl,
- }
+	redirectUrl := &invoice.InternalWebControllersMerchantApiv1InvoiceRedirectURL{
+		Cancel:  &cancelUrl,
+		Success: &successUrl,
+	}
 
- timeBegin := "2023-10-25T12:00:00Z" // [OPTIONAL]
- timeEnd := "2023-10-25T18:00:00Z" // [OPTIONAL]
+	timeBegin := "2023-10-25T12:00:00Z" // [OPTIONAL]
+	timeEnd := "2023-10-25T18:00:00Z" // [OPTIONAL]
 
- request := invoice.InternalWebControllersMerchantApiv1InvoiceInvoiceRequest{
-  Amount:               &amount,
-  AmountCurrency:       &amountCurrency,
-  Country:              &country,
-  Customer:             customer,
-  CustomerNotification: customerNotification,
-  ExternalId:           &externalId,
-  Items:                items,
-  Notes:                &notes,
-  PaymentMethods:       paymentMethods,
-  RedirectUrl:          redirectUrl,
-  TimeBegin:            &timeBegin,
-  TimeEnd:              &timeEnd,
- }
+	request := invoice.InternalWebControllersMerchantApiv1InvoiceInvoiceRequest{
+		Amount:               &amount,
+		AmountCurrency:       &amountCurrency,
+		Country:              &country,
+		Customer:             customer,
+		CustomerNotification: customerNotification,
+		ExternalId:           &externalId,
+		Items:                items,
+		Notes:                &notes,
+		PaymentMethods:       paymentMethods,
+		RedirectUrl:          redirectUrl,
+		TimeBegin:            &timeBegin,
+		TimeEnd:              &timeEnd,
+	}
 
     doitpayClient := doitpay.NewClient("API-KEY")
 

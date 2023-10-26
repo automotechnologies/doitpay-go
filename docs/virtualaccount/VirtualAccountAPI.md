@@ -35,42 +35,42 @@ func main() {
     doitpayClient := doitpay.NewClient("API-KEY")
 
     amount := float32(200.00)
- amountMax := float32(300.00)
- amountMin := float32(100.00)
- businessId := int32(101)
- currency := "USD"
- name := "John Doe"
- email := "john.doe@example.com"
- phone := "555-555-5555"
- expirationDate := "2024-10-25"
- isClosed := false
- isReusable := true
- paymentMethodCode := "PMC789"
- referenceId := "REF12345"
- referenceInternalId := "INT67890"
- virtualAccountSuffix := "VAS456"
+	amountMax := float32(300.00)
+	amountMin := float32(100.00)
+	businessId := int32(101)
+	currency := "USD"
+	name := "John Doe"
+	email := "john.doe@example.com"
+	phone := "555-555-5555"
+	expirationDate := "2024-10-25"
+	isClosed := false
+	isReusable := true
+	paymentMethodCode := "PMC789"
+	referenceId := "REF12345"
+	referenceInternalId := "INT67890"
+	virtualAccountSuffix := "VAS456"
 
- customer := virtualaccount.InternalWebControllersMerchantApiv1VirtualaccountVirtualAccountCustomer{
-  Name:  &name,
-  Email: &email,
-  Phone: &phone,
- }
+	customer := virtualaccount.InternalWebControllersMerchantApiv1VirtualaccountVirtualAccountCustomer{
+		Name:  &name,
+		Email: &email,
+		Phone: &phone,
+	}
 
- request := virtualaccount.InternalWebControllersMerchantApiv1VirtualaccountCreateVirtualAccountRequest{
-  Amount:               &amount,
-  AmountMax:            &amountMax,
-  AmountMin:            &amountMin,
-  BusinessId:           &businessId,
-  Currency:             &currency,
-  Customer:             &customer,
-  ExpirationDate:       &expirationDate,
-  IsClosed:             &isClosed,
-  IsReusable:           &isReusable,
-  PaymentMethodCode:    &paymentMethodCode,
-  ReferenceId:          &referenceId,
-  ReferenceInternalId:  &referenceInternalId,
-  VirtualAccountSuffix: &virtualAccountSuffix,
- }
+	request := virtualaccount.InternalWebControllersMerchantApiv1VirtualaccountCreateVirtualAccountRequest{
+		Amount:               &amount,
+		AmountMax:            &amountMax,
+		AmountMin:            &amountMin,
+		BusinessId:           &businessId,
+		Currency:             &currency,
+		Customer:             &customer,
+		ExpirationDate:       &expirationDate,
+		IsClosed:             &isClosed,
+		IsReusable:           &isReusable,
+		PaymentMethodCode:    &paymentMethodCode,
+		ReferenceId:          &referenceId,
+		ReferenceInternalId:  &referenceInternalId,
+		VirtualAccountSuffix: &virtualAccountSuffix,
+	}
 
     resp, r, err := doitpayClient.VirtualAccountAPI.CreateVirtualAccount(context.Background()).Request(request).Execute()
     if err != nil {
