@@ -29,16 +29,21 @@ import (
 )
 
 func main() {
-    request := *simulate.NewInternalWebControllersMerchantApiv1SimulateSimulateRequest()
+    doitpayClient := doitpay.NewAPIClient("API-KEY")
 
-	request.SetAccountNumber("12345678") // [REQUIRED]
-	request.SetPaymentIdentifier("sample paymentIdentifier") // [REQUIRED]
+    accountNumber := "12345678"
+	paymentIdentifier := "sample payment identifier"
+
+	request := simulate.InternalWebControllersMerchantApiv1SimulateSimulateRequest{ // [REQUIRED]
+		AccountNumber: &accountNumber,
+		PaymentIdentifier: &paymentIdentifier,
+	}
 
     doitpayClient := doitpay.NewAPIClient("API-KEY")
 
-    r, err := apiClient.PublicSimulateAPI.SimulatePayment(context.Background()).Request(request).Execute()
+    r, err := apiClient.SimulateAPI.SimulatePayment(context.Background()).Request(request).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PublicSimulateAPI.SimulatePayment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SimulateAPI.SimulatePayment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }

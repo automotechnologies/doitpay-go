@@ -253,7 +253,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    invoice "github.com/automotechnologies/doitpay-go/invoice"
 )
 
 func main() {
@@ -319,7 +318,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    invoice "github.com/automotechnologies/doitpay-go/invoice"
 )
 
 func main() {
@@ -385,7 +383,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    invoice "github.com/automotechnologies/doitpay-go/invoice"
 )
 
 func main() {
@@ -451,7 +448,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    invoice "github.com/automotechnologies/doitpay-go/invoice"
 )
 
 func main() {
@@ -459,7 +455,7 @@ func main() {
 
     invoiceID := "123" // string | Invoice ID to fetch payment method
 
-    resp, r, err := doitpayClient.InvoiceAPI.GetPaymentMethodById(context.Background(), invoiceId).Execute()
+    resp, r, err := doitpayClient.InvoiceAPI.GetPaymentMethodById(context.Background(), invoiceID).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InvoiceAPI.GetPaymentMethodById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

@@ -34,24 +34,42 @@ import (
 func main() {
     doitpayClient := doitpay.NewClient("API-KEY")
 
-    request := CreateVirtualAccountRequest{
-		BusinessID:           101,
-		ReferenceID:          "REF12345",
-		ReferenceInternalID:  "INT67890",
-		VirtualAccountSuffix: "VAS456",
-		PaymentMethodCode:    "PMC789",
-		IsClosed:             false,
-		IsReusable:           true,
-		Currency:             "USD",
-		Amount:               200.00,
-		AmountMin:            100.00,
-		AmountMax:            300.00,
-		ExpirationDate:       "2024-10-25",
-		Customer: VirtualAccountCustomer{
-			Name:  "John Doe",
-			Email: "john.doe@example.com",
-			Phone: "555-555-5555",
-		},
+    amount := float32(200.00)
+	amountMax := float32(300.00)
+	amountMin := float32(100.00)
+	businessId := int32(101)
+	currency := "USD"
+	name := "John Doe"
+	email := "john.doe@example.com"
+	phone := "555-555-5555"
+	expirationDate := "2024-10-25"
+	isClosed := false
+	isReusable := true
+	paymentMethodCode := "PMC789"
+	referenceId := "REF12345"
+	referenceInternalId := "INT67890"
+	virtualAccountSuffix := "VAS456"
+
+	customer := virtualaccount.InternalWebControllersMerchantApiv1VirtualaccountVirtualAccountCustomer{
+		Name:  &name,
+		Email: &email,
+		Phone: &phone,
+	}
+
+	request := virtualaccount.InternalWebControllersMerchantApiv1VirtualaccountCreateVirtualAccountRequest{
+		Amount:               &amount,
+		AmountMax:            &amountMax,
+		AmountMin:            &amountMin,
+		BusinessId:           &businessId,
+		Currency:             &currency,
+		Customer:             &customer,
+		ExpirationDate:       &expirationDate,
+		IsClosed:             &isClosed,
+		IsReusable:           &isReusable,
+		PaymentMethodCode:    &paymentMethodCode,
+		ReferenceId:          &referenceId,
+		ReferenceInternalId:  &referenceInternalId,
+		VirtualAccountSuffix: &virtualAccountSuffix,
 	}
 
     resp, r, err := doitpayClient.VirtualAccountAPI.CreateVirtualAccount(context.Background()).Request(request).Execute()
@@ -108,7 +126,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    virtualaccount "github.com/automotechnologies/doitpay-go/virtualaccount"
 )
 
 func main() {
@@ -174,7 +191,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    virtualaccount "github.com/automotechnologies/doitpay-go/virtualaccount"
 )
 
 func main() {
@@ -240,7 +256,6 @@ import (
     "os"
     
     doitpay "github.com/automotechnologies/doitpay-go"
-    virtualaccount "github.com/automotechnologies/doitpay-go/virtualaccount"
 )
 
 func main() {
