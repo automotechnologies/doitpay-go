@@ -1,18 +1,16 @@
-# \PublicSimulateAPI
+# doitpay\SimulateAPI
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.doitpay.co*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SimulatePayment**](PublicSimulateAPI.md#SimulatePayment) | **Post** /merchant/v1/simulate-payment | SimulatePayment is handler for simulate payment system.
+[**SimulatePayment**](SimulateAPI.md#SimulatePayment) | **Post** /merchant/v1/simulate-payment | Simulate payment of the system.
 
 
 
 ## SimulatePayment
 
-> SimulatePayment(ctx).Request(request).Execute()
-
-SimulatePayment is handler for simulate payment system.
+Simulate payment of the system.
 
 
 
@@ -25,14 +23,19 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/automotechnologies/doitpay"
+    
+    doitpay "github.com/automotechnologies/doitpay-go"
+    simulate "github.com/automotechnologies/doitpay-go/simulate"
 )
 
 func main() {
-    request := *openapiclient.NewInternalWebControllersMerchantApiv1SimulateSimulateRequest() // InternalWebControllersMerchantApiv1SimulateSimulateRequest | Request payload to simulate payment
+    request := *simulate.NewInternalWebControllersMerchantApiv1SimulateSimulateRequest()
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+	request.SetAccountNumber("12345678") // [REQUIRED]
+	request.SetPaymentIdentifier("sample paymentIdentifier") // [REQUIRED]
+
+    doitpayClient := doitpay.NewAPIClient("API-KEY")
+
     r, err := apiClient.PublicSimulateAPI.SimulatePayment(context.Background()).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PublicSimulateAPI.SimulatePayment``: %v\n", err)
@@ -43,7 +46,7 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any path parameters
 
 ### Other Parameters
 
@@ -58,16 +61,11 @@ Name | Type | Description  | Notes
 
  (empty response body)
 
-### Authorization
-
-No authorization required
-
 ### HTTP request headers
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) 
+[[Back to README]](../../README.md)
 
