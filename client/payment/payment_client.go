@@ -56,17 +56,11 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	PostPaymentV10PaymentHostToHost(params *PostPaymentV10PaymentHostToHostParams, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostOK, error)
+	PostPaymentV10PaymentHostToHost(params *PostPaymentV10PaymentHostToHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostOK, error)
 
-	PostPaymentV10PaymentHostToHostCancel(params *PostPaymentV10PaymentHostToHostCancelParams, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostCancelOK, error)
+	PostPaymentV10PaymentHostToHostCancel(params *PostPaymentV10PaymentHostToHostCancelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostCancelOK, error)
 
-	PostPaymentV10PaymentHostToHostStatus(params *PostPaymentV10PaymentHostToHostStatusParams, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostStatusOK, error)
-
-	PostV10DebitNotify(params *PostV10DebitNotifyParams, opts ...ClientOption) (*PostV10DebitNotifyOK, error)
-
-	PostV10QrQrMpmNotify(params *PostV10QrQrMpmNotifyParams, opts ...ClientOption) (*PostV10QrQrMpmNotifyOK, error)
-
-	PostV10TransferVaPayment(params *PostV10TransferVaPaymentParams, opts ...ClientOption) (*PostV10TransferVaPaymentOK, error)
+	PostPaymentV10PaymentHostToHostStatus(params *PostPaymentV10PaymentHostToHostStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostStatusOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -76,7 +70,7 @@ PostPaymentV10PaymentHostToHost creates e wallet or credit card payment
 
 Create a new payment transaction using e-wallet or credit card
 */
-func (a *Client) PostPaymentV10PaymentHostToHost(params *PostPaymentV10PaymentHostToHostParams, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostOK, error) {
+func (a *Client) PostPaymentV10PaymentHostToHost(params *PostPaymentV10PaymentHostToHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostPaymentV10PaymentHostToHostParams()
@@ -87,9 +81,10 @@ func (a *Client) PostPaymentV10PaymentHostToHost(params *PostPaymentV10PaymentHo
 		PathPattern:        "/payment/v1.0/payment/host-to-host",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostPaymentV10PaymentHostToHostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -116,7 +111,7 @@ PostPaymentV10PaymentHostToHostCancel cancels payment
 
 Cancel an existing e-wallet or credit card payment transaction
 */
-func (a *Client) PostPaymentV10PaymentHostToHostCancel(params *PostPaymentV10PaymentHostToHostCancelParams, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostCancelOK, error) {
+func (a *Client) PostPaymentV10PaymentHostToHostCancel(params *PostPaymentV10PaymentHostToHostCancelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostCancelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostPaymentV10PaymentHostToHostCancelParams()
@@ -127,9 +122,10 @@ func (a *Client) PostPaymentV10PaymentHostToHostCancel(params *PostPaymentV10Pay
 		PathPattern:        "/payment/v1.0/payment/host-to-host/cancel",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostPaymentV10PaymentHostToHostCancelReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -156,7 +152,7 @@ PostPaymentV10PaymentHostToHostStatus checks payment status
 
 Check the status of an e-wallet or credit card payment transaction
 */
-func (a *Client) PostPaymentV10PaymentHostToHostStatus(params *PostPaymentV10PaymentHostToHostStatusParams, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostStatusOK, error) {
+func (a *Client) PostPaymentV10PaymentHostToHostStatus(params *PostPaymentV10PaymentHostToHostStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostPaymentV10PaymentHostToHostStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostPaymentV10PaymentHostToHostStatusParams()
@@ -167,9 +163,10 @@ func (a *Client) PostPaymentV10PaymentHostToHostStatus(params *PostPaymentV10Pay
 		PathPattern:        "/payment/v1.0/payment/host-to-host/status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostPaymentV10PaymentHostToHostStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -188,126 +185,6 @@ func (a *Client) PostPaymentV10PaymentHostToHostStatus(params *PostPaymentV10Pay
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostPaymentV10PaymentHostToHostStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostV10DebitNotify es wallet payment notification endpoint
-
-Handles payment notifications for E-wallet transactions
-*/
-func (a *Client) PostV10DebitNotify(params *PostV10DebitNotifyParams, opts ...ClientOption) (*PostV10DebitNotifyOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV10DebitNotifyParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV10DebitNotify",
-		Method:             "POST",
-		PathPattern:        "/v1.0/debit/notify",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV10DebitNotifyReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV10DebitNotifyOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV10DebitNotify: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostV10QrQrMpmNotify qs r i s payment notification endpoint
-
-Handles payment notifications for QRIS transactions
-*/
-func (a *Client) PostV10QrQrMpmNotify(params *PostV10QrQrMpmNotifyParams, opts ...ClientOption) (*PostV10QrQrMpmNotifyOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV10QrQrMpmNotifyParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV10QrQrMpmNotify",
-		Method:             "POST",
-		PathPattern:        "/v1.0/qr/qr-mpm-notify",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV10QrQrMpmNotifyReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV10QrQrMpmNotifyOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV10QrQrMpmNotify: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostV10TransferVaPayment virtuals account payment notification endpoint
-
-Handles payment notifications for Virtual Account transactions
-*/
-func (a *Client) PostV10TransferVaPayment(params *PostV10TransferVaPaymentParams, opts ...ClientOption) (*PostV10TransferVaPaymentOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostV10TransferVaPaymentParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostV10TransferVaPayment",
-		Method:             "POST",
-		PathPattern:        "/v1.0/transfer-va/payment",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostV10TransferVaPaymentReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostV10TransferVaPaymentOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV10TransferVaPayment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

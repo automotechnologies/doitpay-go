@@ -17,7 +17,8 @@ import (
 // swagger:model apiv1.QrisSimulateRequest
 type Apiv1QrisSimulateRequest struct {
 
-	// reference no
+	// Reference number of the QRIS transaction to simulate
+	// required: true
 	ReferenceNo string `json:"referenceNo,omitempty"`
 }
 

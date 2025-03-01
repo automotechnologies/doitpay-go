@@ -16,6 +16,7 @@ import (
 	"github.com/automotechnologies/doitpay-go/client/payment"
 	"github.com/automotechnologies/doitpay-go/client/public_simulate"
 	"github.com/automotechnologies/doitpay-go/client/q_r_i_s"
+	"github.com/automotechnologies/doitpay-go/client/virtual_account"
 )
 
 // Default doitpay HTTP client.
@@ -24,14 +25,14 @@ var Default = NewHTTPClient(nil)
 const (
 	// DefaultHost is the default Host
 	// found in Meta (info) section of spec file
-	DefaultHost string = "localhost"
+	DefaultHost string = "api.doitpay.co.id"
 	// DefaultBasePath is the default BasePath
 	// found in Meta (info) section of spec file
-	DefaultBasePath string = "/"
+	DefaultBasePath string = "/v1"
 )
 
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
-var DefaultSchemes = []string{"http"}
+var DefaultSchemes = []string{"https"}
 
 // NewHTTPClient creates a new doitpay HTTP client.
 func NewHTTPClient(formats strfmt.Registry) *Doitpay {
@@ -66,6 +67,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Doitpay {
 	cli.Payment = payment.New(transport, formats)
 	cli.PublicSimulate = public_simulate.New(transport, formats)
 	cli.Qris = q_r_i_s.New(transport, formats)
+	cli.VirtualAccount = virtual_account.New(transport, formats)
 	return cli
 }
 
@@ -122,6 +124,8 @@ type Doitpay struct {
 
 	Qris q_r_i_s.ClientService
 
+	VirtualAccount virtual_account.ClientService
+
 	Transport runtime.ClientTransport
 }
 
@@ -134,4 +138,5 @@ func (c *Doitpay) SetTransport(transport runtime.ClientTransport) {
 	c.Payment.SetTransport(transport)
 	c.PublicSimulate.SetTransport(transport)
 	c.Qris.SetTransport(transport)
+	c.VirtualAccount.SetTransport(transport)
 }

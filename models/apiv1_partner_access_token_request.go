@@ -17,7 +17,9 @@ import (
 // swagger:model apiv1.PartnerAccessTokenRequest
 type Apiv1PartnerAccessTokenRequest struct {
 
-	// grant type
+	// The OAuth2 grant type, must be "client_credentials"
+	// required: true
+	// example: client_credentials
 	GrantType string `json:"grantType,omitempty"`
 }
 

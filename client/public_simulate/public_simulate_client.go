@@ -77,7 +77,7 @@ func (a *Client) SimulatePayment(params *SimulatePaymentParams, opts ...ClientOp
 		PathPattern:        "/qris/v1.0/simulate-payment",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &SimulatePaymentReader{formats: a.formats},
 		Context:            params.Context,

@@ -56,19 +56,19 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	PostDisbursementV10Balance(params *PostDisbursementV10BalanceParams, opts ...ClientOption) (*PostDisbursementV10BalanceOK, error)
+	PostDisbursementV10Balance(params *PostDisbursementV10BalanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BalanceOK, error)
 
-	PostDisbursementV10BankAccountValidation(params *PostDisbursementV10BankAccountValidationParams, opts ...ClientOption) (*PostDisbursementV10BankAccountValidationOK, error)
+	PostDisbursementV10BankAccountValidation(params *PostDisbursementV10BankAccountValidationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BankAccountValidationOK, error)
 
-	PostDisbursementV10BankDisbursement(params *PostDisbursementV10BankDisbursementParams, opts ...ClientOption) (*PostDisbursementV10BankDisbursementOK, error)
+	PostDisbursementV10BankDisbursement(params *PostDisbursementV10BankDisbursementParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BankDisbursementOK, error)
 
-	PostDisbursementV10BankDisbursementStatus(params *PostDisbursementV10BankDisbursementStatusParams, opts ...ClientOption) (*PostDisbursementV10BankDisbursementStatusOK, error)
+	PostDisbursementV10BankDisbursementStatus(params *PostDisbursementV10BankDisbursementStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BankDisbursementStatusOK, error)
 
-	PostDisbursementV10EmoneyAccountValidation(params *PostDisbursementV10EmoneyAccountValidationParams, opts ...ClientOption) (*PostDisbursementV10EmoneyAccountValidationOK, error)
+	PostDisbursementV10EmoneyAccountValidation(params *PostDisbursementV10EmoneyAccountValidationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10EmoneyAccountValidationOK, error)
 
-	PostDisbursementV10EmoneyDisbursement(params *PostDisbursementV10EmoneyDisbursementParams, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementOK, error)
+	PostDisbursementV10EmoneyDisbursement(params *PostDisbursementV10EmoneyDisbursementParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementOK, error)
 
-	PostDisbursementV10EmoneyDisbursementStatus(params *PostDisbursementV10EmoneyDisbursementStatusParams, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementStatusOK, error)
+	PostDisbursementV10EmoneyDisbursementStatus(params *PostDisbursementV10EmoneyDisbursementStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementStatusOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -78,7 +78,7 @@ PostDisbursementV10Balance checks account balance
 
 Get the available balance for a specified account
 */
-func (a *Client) PostDisbursementV10Balance(params *PostDisbursementV10BalanceParams, opts ...ClientOption) (*PostDisbursementV10BalanceOK, error) {
+func (a *Client) PostDisbursementV10Balance(params *PostDisbursementV10BalanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BalanceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10BalanceParams()
@@ -89,9 +89,10 @@ func (a *Client) PostDisbursementV10Balance(params *PostDisbursementV10BalancePa
 		PathPattern:        "/disbursement/v1.0/balance",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10BalanceReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -118,7 +119,7 @@ PostDisbursementV10BankAccountValidation validates bank account
 
 Validate bank account details before creating a disbursement
 */
-func (a *Client) PostDisbursementV10BankAccountValidation(params *PostDisbursementV10BankAccountValidationParams, opts ...ClientOption) (*PostDisbursementV10BankAccountValidationOK, error) {
+func (a *Client) PostDisbursementV10BankAccountValidation(params *PostDisbursementV10BankAccountValidationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BankAccountValidationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10BankAccountValidationParams()
@@ -129,9 +130,10 @@ func (a *Client) PostDisbursementV10BankAccountValidation(params *PostDisburseme
 		PathPattern:        "/disbursement/v1.0/bank-account-validation",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10BankAccountValidationReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -158,7 +160,7 @@ PostDisbursementV10BankDisbursement creates bank disbursement transaction
 
 Create a new bank disbursement transaction for transferring funds to a bank account
 */
-func (a *Client) PostDisbursementV10BankDisbursement(params *PostDisbursementV10BankDisbursementParams, opts ...ClientOption) (*PostDisbursementV10BankDisbursementOK, error) {
+func (a *Client) PostDisbursementV10BankDisbursement(params *PostDisbursementV10BankDisbursementParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BankDisbursementOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10BankDisbursementParams()
@@ -169,9 +171,10 @@ func (a *Client) PostDisbursementV10BankDisbursement(params *PostDisbursementV10
 		PathPattern:        "/disbursement/v1.0/bank-disbursement",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10BankDisbursementReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -198,7 +201,7 @@ PostDisbursementV10BankDisbursementStatus gets bank disbursement status
 
 Check the status of a bank disbursement transaction
 */
-func (a *Client) PostDisbursementV10BankDisbursementStatus(params *PostDisbursementV10BankDisbursementStatusParams, opts ...ClientOption) (*PostDisbursementV10BankDisbursementStatusOK, error) {
+func (a *Client) PostDisbursementV10BankDisbursementStatus(params *PostDisbursementV10BankDisbursementStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10BankDisbursementStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10BankDisbursementStatusParams()
@@ -209,9 +212,10 @@ func (a *Client) PostDisbursementV10BankDisbursementStatus(params *PostDisbursem
 		PathPattern:        "/disbursement/v1.0/bank-disbursement/status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10BankDisbursementStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -238,7 +242,7 @@ PostDisbursementV10EmoneyAccountValidation validates e money account
 
 Validate e-money account details before creating a disbursement
 */
-func (a *Client) PostDisbursementV10EmoneyAccountValidation(params *PostDisbursementV10EmoneyAccountValidationParams, opts ...ClientOption) (*PostDisbursementV10EmoneyAccountValidationOK, error) {
+func (a *Client) PostDisbursementV10EmoneyAccountValidation(params *PostDisbursementV10EmoneyAccountValidationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10EmoneyAccountValidationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10EmoneyAccountValidationParams()
@@ -249,9 +253,10 @@ func (a *Client) PostDisbursementV10EmoneyAccountValidation(params *PostDisburse
 		PathPattern:        "/disbursement/v1.0/emoney-account-validation",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10EmoneyAccountValidationReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -278,7 +283,7 @@ PostDisbursementV10EmoneyDisbursement creates e money disbursement
 
 Create a new e-money disbursement transaction for transferring funds to an e-wallet
 */
-func (a *Client) PostDisbursementV10EmoneyDisbursement(params *PostDisbursementV10EmoneyDisbursementParams, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementOK, error) {
+func (a *Client) PostDisbursementV10EmoneyDisbursement(params *PostDisbursementV10EmoneyDisbursementParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10EmoneyDisbursementParams()
@@ -289,9 +294,10 @@ func (a *Client) PostDisbursementV10EmoneyDisbursement(params *PostDisbursementV
 		PathPattern:        "/disbursement/v1.0/emoney-disbursement",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10EmoneyDisbursementReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -318,7 +324,7 @@ PostDisbursementV10EmoneyDisbursementStatus gets e money disbursement status
 
 Check the status of an e-money disbursement transaction
 */
-func (a *Client) PostDisbursementV10EmoneyDisbursementStatus(params *PostDisbursementV10EmoneyDisbursementStatusParams, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementStatusOK, error) {
+func (a *Client) PostDisbursementV10EmoneyDisbursementStatus(params *PostDisbursementV10EmoneyDisbursementStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDisbursementV10EmoneyDisbursementStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDisbursementV10EmoneyDisbursementStatusParams()
@@ -329,9 +335,10 @@ func (a *Client) PostDisbursementV10EmoneyDisbursementStatus(params *PostDisburs
 		PathPattern:        "/disbursement/v1.0/emoney-disbursement/status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDisbursementV10EmoneyDisbursementStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}

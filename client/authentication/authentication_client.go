@@ -56,34 +56,30 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	PostAuthV10AccessTokenB2b(params *PostAuthV10AccessTokenB2bParams, opts ...ClientOption) (*PostAuthV10AccessTokenB2bOK, error)
-
-	PostAuthV10UtilitiesSignatureAuth(params *PostAuthV10UtilitiesSignatureAuthParams, opts ...ClientOption) (*PostAuthV10UtilitiesSignatureAuthOK, error)
-
-	PostAuthV10UtilitiesSignatureService(params *PostAuthV10UtilitiesSignatureServiceParams, opts ...ClientOption) (*PostAuthV10UtilitiesSignatureServiceOK, error)
+	MerchantAPIAccessToken(params *MerchantAPIAccessTokenParams, opts ...ClientOption) (*MerchantAPIAccessTokenOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-PostAuthV10AccessTokenB2b generates b2 b access token
+MerchantAPIAccessToken generates authentication token for b2 b partners
 
-Generates an OAuth2 access token for B2B integration using client credentials
+Generates an OAuth2 access token using client credentials grant type
 */
-func (a *Client) PostAuthV10AccessTokenB2b(params *PostAuthV10AccessTokenB2bParams, opts ...ClientOption) (*PostAuthV10AccessTokenB2bOK, error) {
+func (a *Client) MerchantAPIAccessToken(params *MerchantAPIAccessTokenParams, opts ...ClientOption) (*MerchantAPIAccessTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostAuthV10AccessTokenB2bParams()
+		params = NewMerchantAPIAccessTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostAuthV10AccessTokenB2b",
+		ID:                 "merchant-api-access-token",
 		Method:             "POST",
 		PathPattern:        "/auth/v1.0/access-token/b2b",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostAuthV10AccessTokenB2bReader{formats: a.formats},
+		Reader:             &MerchantAPIAccessTokenReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -95,93 +91,13 @@ func (a *Client) PostAuthV10AccessTokenB2b(params *PostAuthV10AccessTokenB2bPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostAuthV10AccessTokenB2bOK)
+	success, ok := result.(*MerchantAPIAccessTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostAuthV10AccessTokenB2b: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostAuthV10UtilitiesSignatureAuth generates signature for access token request
-
-Generates a signature that can be used for requesting access tokens
-*/
-func (a *Client) PostAuthV10UtilitiesSignatureAuth(params *PostAuthV10UtilitiesSignatureAuthParams, opts ...ClientOption) (*PostAuthV10UtilitiesSignatureAuthOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostAuthV10UtilitiesSignatureAuthParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostAuthV10UtilitiesSignatureAuth",
-		Method:             "POST",
-		PathPattern:        "/auth/v1.0/utilities/signature-auth",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostAuthV10UtilitiesSignatureAuthReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostAuthV10UtilitiesSignatureAuthOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostAuthV10UtilitiesSignatureAuth: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostAuthV10UtilitiesSignatureService generates signature for service requests
-
-Generates a signature that can be used for service API calls
-*/
-func (a *Client) PostAuthV10UtilitiesSignatureService(params *PostAuthV10UtilitiesSignatureServiceParams, opts ...ClientOption) (*PostAuthV10UtilitiesSignatureServiceOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostAuthV10UtilitiesSignatureServiceParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostAuthV10UtilitiesSignatureService",
-		Method:             "POST",
-		PathPattern:        "/auth/v1.0/utilities/signature-service",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PostAuthV10UtilitiesSignatureServiceReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostAuthV10UtilitiesSignatureServiceOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostAuthV10UtilitiesSignatureService: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for merchant-api-access-token: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

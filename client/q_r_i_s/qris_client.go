@@ -56,9 +56,9 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	PostQrisV10QrQrMpmGenerate(params *PostQrisV10QrQrMpmGenerateParams, opts ...ClientOption) (*PostQrisV10QrQrMpmGenerateOK, error)
+	PostQrisV10QrQrMpmGenerate(params *PostQrisV10QrQrMpmGenerateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostQrisV10QrQrMpmGenerateOK, error)
 
-	PostQrisV10QrQrMpmQuery(params *PostQrisV10QrQrMpmQueryParams, opts ...ClientOption) (*PostQrisV10QrQrMpmQueryOK, error)
+	PostQrisV10QrQrMpmQuery(params *PostQrisV10QrQrMpmQueryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostQrisV10QrQrMpmQueryOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -68,7 +68,7 @@ PostQrisV10QrQrMpmGenerate generates q r i s code
 
 Generate a new QRIS code for merchant payment
 */
-func (a *Client) PostQrisV10QrQrMpmGenerate(params *PostQrisV10QrQrMpmGenerateParams, opts ...ClientOption) (*PostQrisV10QrQrMpmGenerateOK, error) {
+func (a *Client) PostQrisV10QrQrMpmGenerate(params *PostQrisV10QrQrMpmGenerateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostQrisV10QrQrMpmGenerateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostQrisV10QrQrMpmGenerateParams()
@@ -79,9 +79,10 @@ func (a *Client) PostQrisV10QrQrMpmGenerate(params *PostQrisV10QrQrMpmGeneratePa
 		PathPattern:        "/qris/v1.0/qr/qr-mpm-generate",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostQrisV10QrQrMpmGenerateReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -108,7 +109,7 @@ PostQrisV10QrQrMpmQuery queries q r i s payment status
 
 Check the status of a QRIS payment transaction
 */
-func (a *Client) PostQrisV10QrQrMpmQuery(params *PostQrisV10QrQrMpmQueryParams, opts ...ClientOption) (*PostQrisV10QrQrMpmQueryOK, error) {
+func (a *Client) PostQrisV10QrQrMpmQuery(params *PostQrisV10QrQrMpmQueryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostQrisV10QrQrMpmQueryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostQrisV10QrQrMpmQueryParams()
@@ -119,9 +120,10 @@ func (a *Client) PostQrisV10QrQrMpmQuery(params *PostQrisV10QrQrMpmQueryParams, 
 		PathPattern:        "/qris/v1.0/qr/qr-mpm-query",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
+		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostQrisV10QrQrMpmQueryReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
