@@ -56,30 +56,30 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	MerchantAPIAccessToken(params *MerchantAPIAccessTokenParams, opts ...ClientOption) (*MerchantAPIAccessTokenOK, error)
+	AccessToken(params *AccessTokenParams, opts ...ClientOption) (*AccessTokenOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-MerchantAPIAccessToken generates authentication token for b2 b partners
+AccessToken generates authentication token for b2 b partners
 
 Generates an OAuth2 access token using client credentials grant type
 */
-func (a *Client) MerchantAPIAccessToken(params *MerchantAPIAccessTokenParams, opts ...ClientOption) (*MerchantAPIAccessTokenOK, error) {
+func (a *Client) AccessToken(params *AccessTokenParams, opts ...ClientOption) (*AccessTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewMerchantAPIAccessTokenParams()
+		params = NewAccessTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "merchant-api-access-token",
+		ID:                 "access-token",
 		Method:             "POST",
 		PathPattern:        "/auth/v1.0/access-token/b2b",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &MerchantAPIAccessTokenReader{formats: a.formats},
+		Reader:             &AccessTokenReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -91,13 +91,13 @@ func (a *Client) MerchantAPIAccessToken(params *MerchantAPIAccessTokenParams, op
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*MerchantAPIAccessTokenOK)
+	success, ok := result.(*AccessTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for merchant-api-access-token: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for access-token: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
