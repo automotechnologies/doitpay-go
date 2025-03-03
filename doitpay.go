@@ -41,6 +41,10 @@ func DefaultConfig() ClientConfig {
 type DoitpayClient struct {
     doitpay *client.Doitpay
     config ClientConfig
+
+    // Services
+    qris *QrisClient
+    disbursement *DisbursementClient
 }
 
 type ClientConfig struct {
@@ -89,12 +93,23 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
 
     // Create transport with auth
     transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https"})
+
+    // Create base client
     baseClient := client.New(transport, strfmt.Default)
     transport.DefaultAuthentication = &doitpayAuth{config: cfg, authService: baseClient.Authentication}
-    // Create base client
 
+
+    qrisClient := NewQrisClient(baseClient.Qris)
+    disbursementClient := NewDisbursementClient(baseClient.Disbursement)
     return &DoitpayClient{
         doitpay: baseClient,
         config:  cfg,
+        qris: qrisClient,
+        disbursement: disbursementClient,
     }, nil
+}
+
+// Qris returns the QRIS client
+func (c *DoitpayClient) Qris() *QrisClient {
+    return c.qris
 }
