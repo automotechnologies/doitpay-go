@@ -67,7 +67,7 @@ type PostDisbursementV10BankDisbursementParams struct {
 
 	   Disbursement request
 	*/
-	Request *models.Apiv1CreateDisbursementRequest
+	Request *models.CreateDisbursementRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10BankDisbursementParams) SetHTTPClient(client *http.C
 }
 
 // WithRequest adds the request to the post disbursement v10 bank disbursement params
-func (o *PostDisbursementV10BankDisbursementParams) WithRequest(request *models.Apiv1CreateDisbursementRequest) *PostDisbursementV10BankDisbursementParams {
+func (o *PostDisbursementV10BankDisbursementParams) WithRequest(request *models.CreateDisbursementRequest) *PostDisbursementV10BankDisbursementParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 bank disbursement params
-func (o *PostDisbursementV10BankDisbursementParams) SetRequest(request *models.Apiv1CreateDisbursementRequest) {
+func (o *PostDisbursementV10BankDisbursementParams) SetRequest(request *models.CreateDisbursementRequest) {
 	o.Request = request
 }
 

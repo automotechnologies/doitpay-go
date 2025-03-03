@@ -73,7 +73,7 @@ type PutV1VirtualAccountParams struct {
 
 	   Virtual Account Request
 	*/
-	Body *models.Apiv1UpdateVirtualAccountRequest
+	Body *models.UpdateVirtualAccountRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *PutV1VirtualAccountParams) SetXCLIENTKEY(xCLIENTKEY string) {
 }
 
 // WithBody adds the body to the put v1 virtual account params
-func (o *PutV1VirtualAccountParams) WithBody(body *models.Apiv1UpdateVirtualAccountRequest) *PutV1VirtualAccountParams {
+func (o *PutV1VirtualAccountParams) WithBody(body *models.UpdateVirtualAccountRequest) *PutV1VirtualAccountParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the put v1 virtual account params
-func (o *PutV1VirtualAccountParams) SetBody(body *models.Apiv1UpdateVirtualAccountRequest) {
+func (o *PutV1VirtualAccountParams) SetBody(body *models.UpdateVirtualAccountRequest) {
 	o.Body = body
 }
 

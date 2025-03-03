@@ -70,7 +70,7 @@ PostDisbursementV10BankDisbursementStatusOK describes a response with status cod
 OK
 */
 type PostDisbursementV10BankDisbursementStatusOK struct {
-	Payload *models.Apiv1InquiryDisbursementStatusResponse
+	Payload *models.InquiryDisbursementStatusResponse
 }
 
 // IsSuccess returns true when this post disbursement v10 bank disbursement status o k response has a 2xx status code
@@ -113,13 +113,13 @@ func (o *PostDisbursementV10BankDisbursementStatusOK) String() string {
 	return fmt.Sprintf("[POST /disbursement/v1.0/bank-disbursement/status][%d] postDisbursementV10BankDisbursementStatusOK %s", 200, payload)
 }
 
-func (o *PostDisbursementV10BankDisbursementStatusOK) GetPayload() *models.Apiv1InquiryDisbursementStatusResponse {
+func (o *PostDisbursementV10BankDisbursementStatusOK) GetPayload() *models.InquiryDisbursementStatusResponse {
 	return o.Payload
 }
 
 func (o *PostDisbursementV10BankDisbursementStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1InquiryDisbursementStatusResponse)
+	o.Payload = new(models.InquiryDisbursementStatusResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

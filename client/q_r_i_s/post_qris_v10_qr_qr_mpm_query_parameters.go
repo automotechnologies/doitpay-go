@@ -67,7 +67,7 @@ type PostQrisV10QrQrMpmQueryParams struct {
 
 	   Query request
 	*/
-	Request *models.Apiv1QrisQueryPaymentRequest
+	Request *models.QrisQueryPaymentRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostQrisV10QrQrMpmQueryParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithRequest adds the request to the post qris v10 qr qr mpm query params
-func (o *PostQrisV10QrQrMpmQueryParams) WithRequest(request *models.Apiv1QrisQueryPaymentRequest) *PostQrisV10QrQrMpmQueryParams {
+func (o *PostQrisV10QrQrMpmQueryParams) WithRequest(request *models.QrisQueryPaymentRequest) *PostQrisV10QrQrMpmQueryParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post qris v10 qr qr mpm query params
-func (o *PostQrisV10QrQrMpmQueryParams) SetRequest(request *models.Apiv1QrisQueryPaymentRequest) {
+func (o *PostQrisV10QrQrMpmQueryParams) SetRequest(request *models.QrisQueryPaymentRequest) {
 	o.Request = request
 }
 

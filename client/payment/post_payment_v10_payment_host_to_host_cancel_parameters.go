@@ -67,7 +67,7 @@ type PostPaymentV10PaymentHostToHostCancelParams struct {
 
 	   Cancel payment request
 	*/
-	Request *models.Apiv1CancelHostToHostPaymentRequest
+	Request *models.CancelHostToHostPaymentRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostPaymentV10PaymentHostToHostCancelParams) SetHTTPClient(client *http
 }
 
 // WithRequest adds the request to the post payment v10 payment host to host cancel params
-func (o *PostPaymentV10PaymentHostToHostCancelParams) WithRequest(request *models.Apiv1CancelHostToHostPaymentRequest) *PostPaymentV10PaymentHostToHostCancelParams {
+func (o *PostPaymentV10PaymentHostToHostCancelParams) WithRequest(request *models.CancelHostToHostPaymentRequest) *PostPaymentV10PaymentHostToHostCancelParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post payment v10 payment host to host cancel params
-func (o *PostPaymentV10PaymentHostToHostCancelParams) SetRequest(request *models.Apiv1CancelHostToHostPaymentRequest) {
+func (o *PostPaymentV10PaymentHostToHostCancelParams) SetRequest(request *models.CancelHostToHostPaymentRequest) {
 	o.Request = request
 }
 

@@ -73,7 +73,7 @@ type DeleteV1VirtualAccountParams struct {
 
 	   Virtual Account Request
 	*/
-	Body *models.Apiv1DeleteVirtualAccountRequest
+	Body *models.DeleteVirtualAccountRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *DeleteV1VirtualAccountParams) SetXCLIENTKEY(xCLIENTKEY string) {
 }
 
 // WithBody adds the body to the delete v1 virtual account params
-func (o *DeleteV1VirtualAccountParams) WithBody(body *models.Apiv1DeleteVirtualAccountRequest) *DeleteV1VirtualAccountParams {
+func (o *DeleteV1VirtualAccountParams) WithBody(body *models.DeleteVirtualAccountRequest) *DeleteV1VirtualAccountParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the delete v1 virtual account params
-func (o *DeleteV1VirtualAccountParams) SetBody(body *models.Apiv1DeleteVirtualAccountRequest) {
+func (o *DeleteV1VirtualAccountParams) SetBody(body *models.DeleteVirtualAccountRequest) {
 	o.Body = body
 }
 

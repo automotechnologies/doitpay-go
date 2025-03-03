@@ -67,7 +67,7 @@ type AccessTokenParams struct {
 
 	   Access token request
 	*/
-	Request *models.Apiv1PartnerAccessTokenRequest
+	Request *models.PartnerAccessTokenRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *AccessTokenParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithRequest adds the request to the access token params
-func (o *AccessTokenParams) WithRequest(request *models.Apiv1PartnerAccessTokenRequest) *AccessTokenParams {
+func (o *AccessTokenParams) WithRequest(request *models.PartnerAccessTokenRequest) *AccessTokenParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the access token params
-func (o *AccessTokenParams) SetRequest(request *models.Apiv1PartnerAccessTokenRequest) {
+func (o *AccessTokenParams) SetRequest(request *models.PartnerAccessTokenRequest) {
 	o.Request = request
 }
 

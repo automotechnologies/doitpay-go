@@ -64,7 +64,7 @@ PostV1MerchantCreated describes a response with status code 201, with default he
 Created
 */
 type PostV1MerchantCreated struct {
-	Payload *models.Apiv1MerchantResponse
+	Payload *models.MerchantResponse
 }
 
 // IsSuccess returns true when this post v1 merchant created response has a 2xx status code
@@ -107,13 +107,13 @@ func (o *PostV1MerchantCreated) String() string {
 	return fmt.Sprintf("[POST /v1/merchant][%d] postV1MerchantCreated %s", 201, payload)
 }
 
-func (o *PostV1MerchantCreated) GetPayload() *models.Apiv1MerchantResponse {
+func (o *PostV1MerchantCreated) GetPayload() *models.MerchantResponse {
 	return o.Payload
 }
 
 func (o *PostV1MerchantCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1MerchantResponse)
+	o.Payload = new(models.MerchantResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

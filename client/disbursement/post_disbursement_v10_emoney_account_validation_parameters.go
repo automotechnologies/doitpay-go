@@ -67,7 +67,7 @@ type PostDisbursementV10EmoneyAccountValidationParams struct {
 
 	   E-money account validation request
 	*/
-	Request *models.Apiv1EmoneyAccountValidationRequest
+	Request *models.EmoneyAccountValidationRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10EmoneyAccountValidationParams) SetHTTPClient(client 
 }
 
 // WithRequest adds the request to the post disbursement v10 emoney account validation params
-func (o *PostDisbursementV10EmoneyAccountValidationParams) WithRequest(request *models.Apiv1EmoneyAccountValidationRequest) *PostDisbursementV10EmoneyAccountValidationParams {
+func (o *PostDisbursementV10EmoneyAccountValidationParams) WithRequest(request *models.EmoneyAccountValidationRequest) *PostDisbursementV10EmoneyAccountValidationParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 emoney account validation params
-func (o *PostDisbursementV10EmoneyAccountValidationParams) SetRequest(request *models.Apiv1EmoneyAccountValidationRequest) {
+func (o *PostDisbursementV10EmoneyAccountValidationParams) SetRequest(request *models.EmoneyAccountValidationRequest) {
 	o.Request = request
 }
 

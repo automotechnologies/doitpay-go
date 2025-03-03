@@ -76,7 +76,7 @@ PostQrisV10QrQrMpmGenerateOK describes a response with status code 200, with def
 OK
 */
 type PostQrisV10QrQrMpmGenerateOK struct {
-	Payload *models.Apiv1QrisResponseScheme
+	Payload *models.QrisResponseScheme
 }
 
 // IsSuccess returns true when this post qris v10 qr qr mpm generate o k response has a 2xx status code
@@ -119,13 +119,13 @@ func (o *PostQrisV10QrQrMpmGenerateOK) String() string {
 	return fmt.Sprintf("[POST /qris/v1.0/qr/qr-mpm-generate][%d] postQrisV10QrQrMpmGenerateOK %s", 200, payload)
 }
 
-func (o *PostQrisV10QrQrMpmGenerateOK) GetPayload() *models.Apiv1QrisResponseScheme {
+func (o *PostQrisV10QrQrMpmGenerateOK) GetPayload() *models.QrisResponseScheme {
 	return o.Payload
 }
 
 func (o *PostQrisV10QrQrMpmGenerateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1QrisResponseScheme)
+	o.Payload = new(models.QrisResponseScheme)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

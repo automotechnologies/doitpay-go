@@ -67,7 +67,7 @@ type PostDisbursementV10BankAccountValidationParams struct {
 
 	   Bank account validation request
 	*/
-	Request *models.Apiv1BankAccountValidationRequest
+	Request *models.BankAccountValidationRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10BankAccountValidationParams) SetHTTPClient(client *h
 }
 
 // WithRequest adds the request to the post disbursement v10 bank account validation params
-func (o *PostDisbursementV10BankAccountValidationParams) WithRequest(request *models.Apiv1BankAccountValidationRequest) *PostDisbursementV10BankAccountValidationParams {
+func (o *PostDisbursementV10BankAccountValidationParams) WithRequest(request *models.BankAccountValidationRequest) *PostDisbursementV10BankAccountValidationParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 bank account validation params
-func (o *PostDisbursementV10BankAccountValidationParams) SetRequest(request *models.Apiv1BankAccountValidationRequest) {
+func (o *PostDisbursementV10BankAccountValidationParams) SetRequest(request *models.BankAccountValidationRequest) {
 	o.Request = request
 }
 

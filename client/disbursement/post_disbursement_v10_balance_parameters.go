@@ -67,7 +67,7 @@ type PostDisbursementV10BalanceParams struct {
 
 	   Balance inquiry request
 	*/
-	Request *models.Apiv1InquiryBalanceRequest
+	Request *models.InquiryBalanceRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10BalanceParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithRequest adds the request to the post disbursement v10 balance params
-func (o *PostDisbursementV10BalanceParams) WithRequest(request *models.Apiv1InquiryBalanceRequest) *PostDisbursementV10BalanceParams {
+func (o *PostDisbursementV10BalanceParams) WithRequest(request *models.InquiryBalanceRequest) *PostDisbursementV10BalanceParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 balance params
-func (o *PostDisbursementV10BalanceParams) SetRequest(request *models.Apiv1InquiryBalanceRequest) {
+func (o *PostDisbursementV10BalanceParams) SetRequest(request *models.InquiryBalanceRequest) {
 	o.Request = request
 }
 

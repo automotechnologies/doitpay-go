@@ -28,7 +28,7 @@ const (
 	DefaultHost string = "api.doitpay.co.id"
 	// DefaultBasePath is the default BasePath
 	// found in Meta (info) section of spec file
-	DefaultBasePath string = "/v1"
+	DefaultBasePath string = "/"
 )
 
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file

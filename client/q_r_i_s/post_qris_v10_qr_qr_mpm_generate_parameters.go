@@ -67,7 +67,7 @@ type PostQrisV10QrQrMpmGenerateParams struct {
 
 	   QRIS generation request
 	*/
-	Request *models.Apiv1QrisRequestScheme
+	Request *models.QrisRequestScheme
 
 	/* XCHANNELID.
 
@@ -159,13 +159,13 @@ func (o *PostQrisV10QrQrMpmGenerateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithRequest adds the request to the post qris v10 qr qr mpm generate params
-func (o *PostQrisV10QrQrMpmGenerateParams) WithRequest(request *models.Apiv1QrisRequestScheme) *PostQrisV10QrQrMpmGenerateParams {
+func (o *PostQrisV10QrQrMpmGenerateParams) WithRequest(request *models.QrisRequestScheme) *PostQrisV10QrQrMpmGenerateParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post qris v10 qr qr mpm generate params
-func (o *PostQrisV10QrQrMpmGenerateParams) SetRequest(request *models.Apiv1QrisRequestScheme) {
+func (o *PostQrisV10QrQrMpmGenerateParams) SetRequest(request *models.QrisRequestScheme) {
 	o.Request = request
 }
 

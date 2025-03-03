@@ -64,7 +64,7 @@ AccessTokenOK describes a response with status code 200, with default header val
 OK
 */
 type AccessTokenOK struct {
-	Payload *models.Apiv1AccessTokenResponse
+	Payload *models.AccessTokenResponse
 }
 
 // IsSuccess returns true when this access token o k response has a 2xx status code
@@ -107,13 +107,13 @@ func (o *AccessTokenOK) String() string {
 	return fmt.Sprintf("[POST /auth/v1.0/access-token/b2b][%d] accessTokenOK %s", 200, payload)
 }
 
-func (o *AccessTokenOK) GetPayload() *models.Apiv1AccessTokenResponse {
+func (o *AccessTokenOK) GetPayload() *models.AccessTokenResponse {
 	return o.Payload
 }
 
 func (o *AccessTokenOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1AccessTokenResponse)
+	o.Payload = new(models.AccessTokenResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

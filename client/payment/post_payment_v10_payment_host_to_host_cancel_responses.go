@@ -70,7 +70,7 @@ PostPaymentV10PaymentHostToHostCancelOK describes a response with status code 20
 OK
 */
 type PostPaymentV10PaymentHostToHostCancelOK struct {
-	Payload *models.Apiv1CancelHostToHostPaymentResponse
+	Payload *models.CancelHostToHostPaymentResponse
 }
 
 // IsSuccess returns true when this post payment v10 payment host to host cancel o k response has a 2xx status code
@@ -113,13 +113,13 @@ func (o *PostPaymentV10PaymentHostToHostCancelOK) String() string {
 	return fmt.Sprintf("[POST /payment/v1.0/payment/host-to-host/cancel][%d] postPaymentV10PaymentHostToHostCancelOK %s", 200, payload)
 }
 
-func (o *PostPaymentV10PaymentHostToHostCancelOK) GetPayload() *models.Apiv1CancelHostToHostPaymentResponse {
+func (o *PostPaymentV10PaymentHostToHostCancelOK) GetPayload() *models.CancelHostToHostPaymentResponse {
 	return o.Payload
 }
 
 func (o *PostPaymentV10PaymentHostToHostCancelOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1CancelHostToHostPaymentResponse)
+	o.Payload = new(models.CancelHostToHostPaymentResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

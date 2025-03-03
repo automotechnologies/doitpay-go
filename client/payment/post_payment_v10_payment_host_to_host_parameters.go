@@ -67,7 +67,7 @@ type PostPaymentV10PaymentHostToHostParams struct {
 
 	   Payment request
 	*/
-	Request *models.Apiv1CreateEwalletRequest
+	Request *models.CreateEwalletRequest
 
 	/* XCHANNELID.
 
@@ -159,13 +159,13 @@ func (o *PostPaymentV10PaymentHostToHostParams) SetHTTPClient(client *http.Clien
 }
 
 // WithRequest adds the request to the post payment v10 payment host to host params
-func (o *PostPaymentV10PaymentHostToHostParams) WithRequest(request *models.Apiv1CreateEwalletRequest) *PostPaymentV10PaymentHostToHostParams {
+func (o *PostPaymentV10PaymentHostToHostParams) WithRequest(request *models.CreateEwalletRequest) *PostPaymentV10PaymentHostToHostParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post payment v10 payment host to host params
-func (o *PostPaymentV10PaymentHostToHostParams) SetRequest(request *models.Apiv1CreateEwalletRequest) {
+func (o *PostPaymentV10PaymentHostToHostParams) SetRequest(request *models.CreateEwalletRequest) {
 	o.Request = request
 }
 

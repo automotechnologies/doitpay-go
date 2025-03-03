@@ -73,7 +73,7 @@ type PostV1MerchantParams struct {
 
 	   Merchant creation request
 	*/
-	Request *models.Apiv1CreateMerchantRequest
+	Request *models.CreateMerchantRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *PostV1MerchantParams) SetAuthorization(authorization string) {
 }
 
 // WithRequest adds the request to the post v1 merchant params
-func (o *PostV1MerchantParams) WithRequest(request *models.Apiv1CreateMerchantRequest) *PostV1MerchantParams {
+func (o *PostV1MerchantParams) WithRequest(request *models.CreateMerchantRequest) *PostV1MerchantParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post v1 merchant params
-func (o *PostV1MerchantParams) SetRequest(request *models.Apiv1CreateMerchantRequest) {
+func (o *PostV1MerchantParams) SetRequest(request *models.CreateMerchantRequest) {
 	o.Request = request
 }
 

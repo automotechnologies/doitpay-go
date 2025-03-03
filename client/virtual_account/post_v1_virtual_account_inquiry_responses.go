@@ -64,7 +64,7 @@ PostV1VirtualAccountInquiryOK describes a response with status code 200, with de
 OK
 */
 type PostV1VirtualAccountInquiryOK struct {
-	Payload *models.Apiv1InquiryVirtualAccountResponse
+	Payload *models.InquiryVirtualAccountResponse
 }
 
 // IsSuccess returns true when this post v1 virtual account inquiry o k response has a 2xx status code
@@ -107,13 +107,13 @@ func (o *PostV1VirtualAccountInquiryOK) String() string {
 	return fmt.Sprintf("[POST /v1/virtual-account/inquiry][%d] postV1VirtualAccountInquiryOK %s", 200, payload)
 }
 
-func (o *PostV1VirtualAccountInquiryOK) GetPayload() *models.Apiv1InquiryVirtualAccountResponse {
+func (o *PostV1VirtualAccountInquiryOK) GetPayload() *models.InquiryVirtualAccountResponse {
 	return o.Payload
 }
 
 func (o *PostV1VirtualAccountInquiryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1InquiryVirtualAccountResponse)
+	o.Payload = new(models.InquiryVirtualAccountResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

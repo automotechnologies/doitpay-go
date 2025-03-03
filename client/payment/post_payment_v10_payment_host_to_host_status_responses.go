@@ -70,7 +70,7 @@ PostPaymentV10PaymentHostToHostStatusOK describes a response with status code 20
 OK
 */
 type PostPaymentV10PaymentHostToHostStatusOK struct {
-	Payload *models.Apiv1CheckPaymentStatusEwalletResponse
+	Payload *models.CheckPaymentStatusEwalletResponse
 }
 
 // IsSuccess returns true when this post payment v10 payment host to host status o k response has a 2xx status code
@@ -113,13 +113,13 @@ func (o *PostPaymentV10PaymentHostToHostStatusOK) String() string {
 	return fmt.Sprintf("[POST /payment/v1.0/payment/host-to-host/status][%d] postPaymentV10PaymentHostToHostStatusOK %s", 200, payload)
 }
 
-func (o *PostPaymentV10PaymentHostToHostStatusOK) GetPayload() *models.Apiv1CheckPaymentStatusEwalletResponse {
+func (o *PostPaymentV10PaymentHostToHostStatusOK) GetPayload() *models.CheckPaymentStatusEwalletResponse {
 	return o.Payload
 }
 
 func (o *PostPaymentV10PaymentHostToHostStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1CheckPaymentStatusEwalletResponse)
+	o.Payload = new(models.CheckPaymentStatusEwalletResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

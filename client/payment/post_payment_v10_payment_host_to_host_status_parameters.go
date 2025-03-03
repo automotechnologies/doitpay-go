@@ -67,7 +67,7 @@ type PostPaymentV10PaymentHostToHostStatusParams struct {
 
 	   Status check request
 	*/
-	Request *models.Apiv1CheckPaymentStatusEwalletRequest
+	Request *models.CheckPaymentStatusEwalletRequest
 
 	/* XCHANNELID.
 
@@ -159,13 +159,13 @@ func (o *PostPaymentV10PaymentHostToHostStatusParams) SetHTTPClient(client *http
 }
 
 // WithRequest adds the request to the post payment v10 payment host to host status params
-func (o *PostPaymentV10PaymentHostToHostStatusParams) WithRequest(request *models.Apiv1CheckPaymentStatusEwalletRequest) *PostPaymentV10PaymentHostToHostStatusParams {
+func (o *PostPaymentV10PaymentHostToHostStatusParams) WithRequest(request *models.CheckPaymentStatusEwalletRequest) *PostPaymentV10PaymentHostToHostStatusParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post payment v10 payment host to host status params
-func (o *PostPaymentV10PaymentHostToHostStatusParams) SetRequest(request *models.Apiv1CheckPaymentStatusEwalletRequest) {
+func (o *PostPaymentV10PaymentHostToHostStatusParams) SetRequest(request *models.CheckPaymentStatusEwalletRequest) {
 	o.Request = request
 }
 

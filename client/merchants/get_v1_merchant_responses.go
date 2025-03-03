@@ -58,7 +58,7 @@ GetV1MerchantOK describes a response with status code 200, with default header v
 OK
 */
 type GetV1MerchantOK struct {
-	Payload *models.Apiv1PaginatedMerchantResponse
+	Payload *models.PaginatedMerchantResponse
 }
 
 // IsSuccess returns true when this get v1 merchant o k response has a 2xx status code
@@ -101,13 +101,13 @@ func (o *GetV1MerchantOK) String() string {
 	return fmt.Sprintf("[GET /v1/merchant][%d] getV1MerchantOK %s", 200, payload)
 }
 
-func (o *GetV1MerchantOK) GetPayload() *models.Apiv1PaginatedMerchantResponse {
+func (o *GetV1MerchantOK) GetPayload() *models.PaginatedMerchantResponse {
 	return o.Payload
 }
 
 func (o *GetV1MerchantOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1PaginatedMerchantResponse)
+	o.Payload = new(models.PaginatedMerchantResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

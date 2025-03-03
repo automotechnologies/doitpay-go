@@ -70,7 +70,7 @@ GetV1MerchantMerchantRefOK describes a response with status code 200, with defau
 OK
 */
 type GetV1MerchantMerchantRefOK struct {
-	Payload *models.Apiv1MerchantResponse
+	Payload *models.MerchantResponse
 }
 
 // IsSuccess returns true when this get v1 merchant merchant ref o k response has a 2xx status code
@@ -113,13 +113,13 @@ func (o *GetV1MerchantMerchantRefOK) String() string {
 	return fmt.Sprintf("[GET /v1/merchant/{merchant_ref}][%d] getV1MerchantMerchantRefOK %s", 200, payload)
 }
 
-func (o *GetV1MerchantMerchantRefOK) GetPayload() *models.Apiv1MerchantResponse {
+func (o *GetV1MerchantMerchantRefOK) GetPayload() *models.MerchantResponse {
 	return o.Payload
 }
 
 func (o *GetV1MerchantMerchantRefOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1MerchantResponse)
+	o.Payload = new(models.MerchantResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

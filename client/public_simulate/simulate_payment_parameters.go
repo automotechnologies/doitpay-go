@@ -67,7 +67,7 @@ type SimulatePaymentParams struct {
 
 	   Request payload to simulate payment
 	*/
-	Request *models.Apiv1QrisSimulateRequest
+	Request *models.QrisSimulateRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -123,13 +123,13 @@ func (o *SimulatePaymentParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithRequest adds the request to the simulate payment params
-func (o *SimulatePaymentParams) WithRequest(request *models.Apiv1QrisSimulateRequest) *SimulatePaymentParams {
+func (o *SimulatePaymentParams) WithRequest(request *models.QrisSimulateRequest) *SimulatePaymentParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the simulate payment params
-func (o *SimulatePaymentParams) SetRequest(request *models.Apiv1QrisSimulateRequest) {
+func (o *SimulatePaymentParams) SetRequest(request *models.QrisSimulateRequest) {
 	o.Request = request
 }
 

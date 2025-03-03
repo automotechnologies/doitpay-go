@@ -67,7 +67,7 @@ type PostDisbursementV10EmoneyDisbursementParams struct {
 
 	   E-wallet topup request
 	*/
-	Request *models.Apiv1CreateEwalletTopupRequest
+	Request *models.CreateEwalletTopupRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10EmoneyDisbursementParams) SetHTTPClient(client *http
 }
 
 // WithRequest adds the request to the post disbursement v10 emoney disbursement params
-func (o *PostDisbursementV10EmoneyDisbursementParams) WithRequest(request *models.Apiv1CreateEwalletTopupRequest) *PostDisbursementV10EmoneyDisbursementParams {
+func (o *PostDisbursementV10EmoneyDisbursementParams) WithRequest(request *models.CreateEwalletTopupRequest) *PostDisbursementV10EmoneyDisbursementParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 emoney disbursement params
-func (o *PostDisbursementV10EmoneyDisbursementParams) SetRequest(request *models.Apiv1CreateEwalletTopupRequest) {
+func (o *PostDisbursementV10EmoneyDisbursementParams) SetRequest(request *models.CreateEwalletTopupRequest) {
 	o.Request = request
 }
 

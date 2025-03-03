@@ -73,7 +73,7 @@ type PostV1VirtualAccountInquiryParams struct {
 
 	   Virtual Account Request
 	*/
-	Body *models.Apiv1InquiryVirtualAccountRequest
+	Body *models.InquiryVirtualAccountRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *PostV1VirtualAccountInquiryParams) SetXCLIENTKEY(xCLIENTKEY string) {
 }
 
 // WithBody adds the body to the post v1 virtual account inquiry params
-func (o *PostV1VirtualAccountInquiryParams) WithBody(body *models.Apiv1InquiryVirtualAccountRequest) *PostV1VirtualAccountInquiryParams {
+func (o *PostV1VirtualAccountInquiryParams) WithBody(body *models.InquiryVirtualAccountRequest) *PostV1VirtualAccountInquiryParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the post v1 virtual account inquiry params
-func (o *PostV1VirtualAccountInquiryParams) SetBody(body *models.Apiv1InquiryVirtualAccountRequest) {
+func (o *PostV1VirtualAccountInquiryParams) SetBody(body *models.InquiryVirtualAccountRequest) {
 	o.Body = body
 }
 

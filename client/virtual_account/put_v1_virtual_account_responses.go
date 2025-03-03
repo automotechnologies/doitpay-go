@@ -64,7 +64,7 @@ PutV1VirtualAccountOK describes a response with status code 200, with default he
 OK
 */
 type PutV1VirtualAccountOK struct {
-	Payload *models.Apiv1UpdateVirtualAccountResponse
+	Payload *models.UpdateVirtualAccountResponse
 }
 
 // IsSuccess returns true when this put v1 virtual account o k response has a 2xx status code
@@ -107,13 +107,13 @@ func (o *PutV1VirtualAccountOK) String() string {
 	return fmt.Sprintf("[PUT /v1/virtual-account][%d] putV1VirtualAccountOK %s", 200, payload)
 }
 
-func (o *PutV1VirtualAccountOK) GetPayload() *models.Apiv1UpdateVirtualAccountResponse {
+func (o *PutV1VirtualAccountOK) GetPayload() *models.UpdateVirtualAccountResponse {
 	return o.Payload
 }
 
 func (o *PutV1VirtualAccountOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1UpdateVirtualAccountResponse)
+	o.Payload = new(models.UpdateVirtualAccountResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

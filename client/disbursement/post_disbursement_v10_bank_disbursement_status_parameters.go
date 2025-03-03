@@ -67,7 +67,7 @@ type PostDisbursementV10BankDisbursementStatusParams struct {
 
 	   Status inquiry request
 	*/
-	Request *models.Apiv1InquiryDisbursementStatusRequest
+	Request *models.InquiryDisbursementStatusRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10BankDisbursementStatusParams) SetHTTPClient(client *
 }
 
 // WithRequest adds the request to the post disbursement v10 bank disbursement status params
-func (o *PostDisbursementV10BankDisbursementStatusParams) WithRequest(request *models.Apiv1InquiryDisbursementStatusRequest) *PostDisbursementV10BankDisbursementStatusParams {
+func (o *PostDisbursementV10BankDisbursementStatusParams) WithRequest(request *models.InquiryDisbursementStatusRequest) *PostDisbursementV10BankDisbursementStatusParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 bank disbursement status params
-func (o *PostDisbursementV10BankDisbursementStatusParams) SetRequest(request *models.Apiv1InquiryDisbursementStatusRequest) {
+func (o *PostDisbursementV10BankDisbursementStatusParams) SetRequest(request *models.InquiryDisbursementStatusRequest) {
 	o.Request = request
 }
 

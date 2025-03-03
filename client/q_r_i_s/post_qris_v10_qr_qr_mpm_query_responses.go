@@ -70,7 +70,7 @@ PostQrisV10QrQrMpmQueryOK describes a response with status code 200, with defaul
 OK
 */
 type PostQrisV10QrQrMpmQueryOK struct {
-	Payload *models.Apiv1QrisQueryPaymentResponse
+	Payload *models.QrisQueryPaymentResponse
 }
 
 // IsSuccess returns true when this post qris v10 qr qr mpm query o k response has a 2xx status code
@@ -113,13 +113,13 @@ func (o *PostQrisV10QrQrMpmQueryOK) String() string {
 	return fmt.Sprintf("[POST /qris/v1.0/qr/qr-mpm-query][%d] postQrisV10QrQrMpmQueryOK %s", 200, payload)
 }
 
-func (o *PostQrisV10QrQrMpmQueryOK) GetPayload() *models.Apiv1QrisQueryPaymentResponse {
+func (o *PostQrisV10QrQrMpmQueryOK) GetPayload() *models.QrisQueryPaymentResponse {
 	return o.Payload
 }
 
 func (o *PostQrisV10QrQrMpmQueryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1QrisQueryPaymentResponse)
+	o.Payload = new(models.QrisQueryPaymentResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

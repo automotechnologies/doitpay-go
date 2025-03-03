@@ -64,7 +64,7 @@ PostV1VirtualAccountOK describes a response with status code 200, with default h
 OK
 */
 type PostV1VirtualAccountOK struct {
-	Payload *models.Apiv1CreateVirtualAccountResponse
+	Payload *models.CreateVirtualAccountResponse
 }
 
 // IsSuccess returns true when this post v1 virtual account o k response has a 2xx status code
@@ -107,13 +107,13 @@ func (o *PostV1VirtualAccountOK) String() string {
 	return fmt.Sprintf("[POST /v1/virtual-account][%d] postV1VirtualAccountOK %s", 200, payload)
 }
 
-func (o *PostV1VirtualAccountOK) GetPayload() *models.Apiv1CreateVirtualAccountResponse {
+func (o *PostV1VirtualAccountOK) GetPayload() *models.CreateVirtualAccountResponse {
 	return o.Payload
 }
 
 func (o *PostV1VirtualAccountOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Apiv1CreateVirtualAccountResponse)
+	o.Payload = new(models.CreateVirtualAccountResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

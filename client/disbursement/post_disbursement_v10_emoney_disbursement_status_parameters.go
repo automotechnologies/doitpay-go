@@ -67,7 +67,7 @@ type PostDisbursementV10EmoneyDisbursementStatusParams struct {
 
 	   Status inquiry request
 	*/
-	Request *models.Apiv1InquiryEwalletTopupStatusRequest
+	Request *models.InquiryEwalletTopupStatusRequest
 
 	/* XCLIENTKEY.
 
@@ -141,13 +141,13 @@ func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetHTTPClient(client
 }
 
 // WithRequest adds the request to the post disbursement v10 emoney disbursement status params
-func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WithRequest(request *models.Apiv1InquiryEwalletTopupStatusRequest) *PostDisbursementV10EmoneyDisbursementStatusParams {
+func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WithRequest(request *models.InquiryEwalletTopupStatusRequest) *PostDisbursementV10EmoneyDisbursementStatusParams {
 	o.SetRequest(request)
 	return o
 }
 
 // SetRequest adds the request to the post disbursement v10 emoney disbursement status params
-func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetRequest(request *models.Apiv1InquiryEwalletTopupStatusRequest) {
+func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetRequest(request *models.InquiryEwalletTopupStatusRequest) {
 	o.Request = request
 }
 

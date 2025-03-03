@@ -73,7 +73,7 @@ type PostV1VirtualAccountPaymentStatusParams struct {
 
 	   Virtual Account Request
 	*/
-	Body *models.Apiv1CheckVirtualAccountPaymentStatusRequest
+	Body *models.CheckVirtualAccountPaymentStatusRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *PostV1VirtualAccountPaymentStatusParams) SetXCLIENTKEY(xCLIENTKEY strin
 }
 
 // WithBody adds the body to the post v1 virtual account payment status params
-func (o *PostV1VirtualAccountPaymentStatusParams) WithBody(body *models.Apiv1CheckVirtualAccountPaymentStatusRequest) *PostV1VirtualAccountPaymentStatusParams {
+func (o *PostV1VirtualAccountPaymentStatusParams) WithBody(body *models.CheckVirtualAccountPaymentStatusRequest) *PostV1VirtualAccountPaymentStatusParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the post v1 virtual account payment status params
-func (o *PostV1VirtualAccountPaymentStatusParams) SetBody(body *models.Apiv1CheckVirtualAccountPaymentStatusRequest) {
+func (o *PostV1VirtualAccountPaymentStatusParams) SetBody(body *models.CheckVirtualAccountPaymentStatusRequest) {
 	o.Body = body
 }
 
