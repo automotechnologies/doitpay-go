@@ -45,6 +45,7 @@ type DoitpayClient struct {
     // Services
     qris *QrisClient
     disbursement *DisbursementClient
+    simulate *SimulateClient
 }
 
 type ClientConfig struct {
@@ -101,11 +102,13 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
 
     qrisClient := NewQrisClient(baseClient.Qris)
     disbursementClient := NewDisbursementClient(baseClient.Disbursement)
+    simulateClient := NewSimulateClient(baseClient.PublicSimulate)
     return &DoitpayClient{
         doitpay: baseClient,
         config:  cfg,
         qris: qrisClient,
         disbursement: disbursementClient,
+        simulate: simulateClient,
     }, nil
 }
 
