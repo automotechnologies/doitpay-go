@@ -10,13 +10,13 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/client/authentication"
-	"github.com/automotechnologies/doitpay-go/client/disbursement"
-	"github.com/automotechnologies/doitpay-go/client/merchants"
-	"github.com/automotechnologies/doitpay-go/client/payment"
-	"github.com/automotechnologies/doitpay-go/client/public_simulate"
-	"github.com/automotechnologies/doitpay-go/client/q_r_i_s"
-	"github.com/automotechnologies/doitpay-go/client/virtual_account"
+	"github.com/automotechnologies/doitpay-go/v2/client/authentication"
+	"github.com/automotechnologies/doitpay-go/v2/client/disbursement"
+	"github.com/automotechnologies/doitpay-go/v2/client/merchants"
+	"github.com/automotechnologies/doitpay-go/v2/client/payment"
+	"github.com/automotechnologies/doitpay-go/v2/client/public_simulate"
+	"github.com/automotechnologies/doitpay-go/v2/client/q_r_i_s"
+	"github.com/automotechnologies/doitpay-go/v2/client/virtual_account"
 )
 
 // Default doitpay HTTP client.

@@ -1,4 +1,4 @@
-module github.com/automotechnologies/doitpay-go
+module github.com/automotechnologies/doitpay-go/v2
 
 go 1.21.1
 

@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/automotechnologies/doitpay-go/client/authentication"
-	"github.com/automotechnologies/doitpay-go/models"
-	"github.com/automotechnologies/doitpay-go/pkg/signature"
+	"github.com/automotechnologies/doitpay-go/v2/client/authentication"
+	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go/v2/pkg/signature"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )

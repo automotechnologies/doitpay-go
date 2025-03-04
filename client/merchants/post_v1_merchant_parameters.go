@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/models"
+	"github.com/automotechnologies/doitpay-go/v2/models"
 )
 
 // NewPostV1MerchantParams creates a new PostV1MerchantParams object,

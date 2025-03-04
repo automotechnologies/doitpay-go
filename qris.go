@@ -3,8 +3,8 @@ package doitpay
 import (
 	"context"
 
-	"github.com/automotechnologies/doitpay-go/client/q_r_i_s"
-	"github.com/automotechnologies/doitpay-go/models"
+	"github.com/automotechnologies/doitpay-go/v2/client/q_r_i_s"
+	"github.com/automotechnologies/doitpay-go/v2/models"
 )
 
 // QrisClient is a client for the QRIS API

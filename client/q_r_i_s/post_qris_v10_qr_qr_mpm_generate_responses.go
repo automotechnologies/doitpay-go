@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/models"
+	"github.com/automotechnologies/doitpay-go/v2/models"
 )
 
 // PostQrisV10QrQrMpmGenerateReader is a Reader for the PostQrisV10QrQrMpmGenerate structure.

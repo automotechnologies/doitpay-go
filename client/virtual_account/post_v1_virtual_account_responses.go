@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/models"
+	"github.com/automotechnologies/doitpay-go/v2/models"
 )
 
 // PostV1VirtualAccountReader is a Reader for the PostV1VirtualAccount structure.
