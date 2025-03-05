@@ -21,7 +21,7 @@ type AccessToken struct {
 }
 
 // Custom auth implementation
-type doitpayAuth struct {
+type DoitpayAuth struct {
     config ClientConfig
     accessToken *AccessToken
     authService authentication.ClientService
@@ -29,7 +29,7 @@ type doitpayAuth struct {
 
 
 // GetAccessToken retrieves an access token from the authentication service
-func (a *doitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
+func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
     if a.accessToken == nil || a.accessToken.ExpiresAt.Before(time.Now()) {
     
         timestamp := time.Now().UTC()
@@ -68,7 +68,7 @@ func (a *doitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
 }
 
 // AuthenticateRequest authenticates a request with the access token
-func (a *doitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.Registry) error {
+func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.Registry) error {
     timestamp := time.Now().UTC()
     
     // Set required headers
