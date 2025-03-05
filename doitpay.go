@@ -3,6 +3,7 @@ package doitpay
 import (
 	"crypto/rsa"
 	"crypto/x509"
+	"encoding/pem"
 	"fmt"
 	"os"
 
@@ -80,13 +81,21 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
     }
 
     // parse private key
-    privateKey, err := x509.ParsePKCS8PrivateKey(privateKeyBytes)
+    privatePem, _ := pem.Decode(privateKeyBytes)
+    if privatePem == nil {
+        return nil, fmt.Errorf("failed to decode private key")
+    }
+
+    if privatePem.Type != "RSA PRIVATE KEY" && privatePem.Type != "ENCRYPTED PRIVATE KEY" && privatePem.Type != "PRIVATE KEY" {
+        return nil, fmt.Errorf("private key is not a valid PEM file")
+    }
+
+    parsedKey, err := x509.ParsePKCS8PrivateKey(privatePem.Bytes)
     if err != nil {
         return nil, fmt.Errorf("failed to parse private key: %s", err)
     }
 
-
-    rsaPrivateKey, ok := privateKey.(*rsa.PrivateKey)
+    rsaPrivateKey, ok := parsedKey.(*rsa.PrivateKey)
     if !ok {
         return nil, fmt.Errorf("private key is not an RSA private key")
     }
