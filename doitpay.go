@@ -116,3 +116,13 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
 func (c *DoitpayClient) Qris() *QrisClient {
     return c.qris
 }
+
+// Disbursement returns the Disbursement client
+func (c *DoitpayClient) Disbursement() *DisbursementClient {
+    return c.disbursement
+}
+
+// Simulate returns the Simulate client
+func (c *DoitpayClient) Simulate() *SimulateClient {
+    return c.simulate
+}
