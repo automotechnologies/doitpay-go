@@ -97,7 +97,7 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
 
     // Create base client
     baseClient := client.New(transport, strfmt.Default)
-    transport.DefaultAuthentication = &doitpayAuth{config: cfg, authService: baseClient.Authentication}
+    transport.DefaultAuthentication = &DoitpayAuth{config: cfg, authService: baseClient.Authentication}
 
 
     qrisClient := NewQrisClient(baseClient.Qris)
