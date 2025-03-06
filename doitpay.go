@@ -33,8 +33,8 @@ func WithBasePath(basePath string) ClientOption {
 // DefaultConfig provides the default configuration for the client
 func DefaultConfig() ClientConfig {
     return ClientConfig{
-        Host:     "api.doitpay.co", // example default
-        BasePath: "",             // example default
+        Host:     client.DefaultHost, // example default
+        BasePath: client.DefaultBasePath,             // example default
     }
 }
 
@@ -105,7 +105,9 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
     transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https"})
     
     // Need to use default authentication that follows SNAP flows.
-    transport.DefaultAuthentication = &DoitpayAuth{config: cfg, authService: client.NewHTTPClient(strfmt.Default).Authentication}
+    transport.DefaultAuthentication = &DoitpayAuth{
+        config: cfg, 
+        authService: client.New(httptransport.New(cfg.Host, cfg.BasePath, []string{"https"}), strfmt.Default).Authentication}
 
     // Create base client
     baseClient := client.New(transport, strfmt.Default)
