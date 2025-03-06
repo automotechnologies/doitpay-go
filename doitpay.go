@@ -105,9 +105,7 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
     transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https"})
     
     // Need to use default authentication that follows SNAP flows.
-    transport.DefaultAuthentication = &DoitpayAuth{
-        config: cfg, 
-        authService: client.New(httptransport.New(cfg.Host, cfg.BasePath, []string{"https"}), strfmt.Default).Authentication}
+    transport.DefaultAuthentication = NewDoitpayAuth(cfg)
 
     // Create base client
     baseClient := client.New(transport, strfmt.Default)

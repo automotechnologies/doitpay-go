@@ -6,10 +6,12 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/automotechnologies/doitpay-go/v2/client"
 	"github.com/automotechnologies/doitpay-go/v2/client/authentication"
 	"github.com/automotechnologies/doitpay-go/v2/models"
 	"github.com/automotechnologies/doitpay-go/v2/pkg/signature"
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
@@ -24,9 +26,11 @@ type AccessToken struct {
 type DoitpayAuth struct {
     config ClientConfig
     accessToken *AccessToken
-    authService authentication.ClientService
 }
 
+func NewDoitpayAuth(config ClientConfig) *DoitpayAuth {
+    return &DoitpayAuth{config: config}
+}
 
 // GetAccessToken retrieves an access token from the authentication service
 func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
@@ -38,7 +42,10 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
             return "", err
         }
 
-        resp, err := a.authService.AccessToken(&authentication.AccessTokenParams{
+        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"https"})
+        authService := client.New(transport, strfmt.Default).Authentication
+
+        resp, err := authService.AccessToken(&authentication.AccessTokenParams{
             XTIMESTAMP: timestamp.Format(time.RFC3339),
             XSIGNATURE: signature,
             XCLIENTKEY: a.config.ClientSecret,
