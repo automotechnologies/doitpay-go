@@ -109,6 +109,7 @@ func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.
     }
 
     headers["X-SIGNATURE"] = signature
+    headers["Authorization"] = "Bearer " + accessToken
 
     // Set all headers
     for key, value := range headers {
