@@ -53,14 +53,16 @@ type ClientConfig struct {
     Host      string
     BasePath  string
     ClientSecret string
+    PartnerID string
     PrivateKey *rsa.PrivateKey
 }
 // NewClient creates a new authenticated client with optional configurations
-func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*DoitpayClient, error) {
+func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOption) (*DoitpayClient, error) {
     // Start with default config
     cfg := DefaultConfig()
     
     // Apply required credentials
+    cfg.PartnerID = partnerID
     cfg.ClientSecret = clientSecret
     
     // Apply any custom options
@@ -102,7 +104,7 @@ func NewClient(clientSecret, privateKeyPath string, opts ...ClientOption) (*Doit
     cfg.PrivateKey = rsaPrivateKey
 
     // Create transport with auth
-    transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https"})
+    transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"http"})
     
     // Need to use default authentication that follows SNAP flows.
     transport.DefaultAuthentication = NewDoitpayAuth(cfg)

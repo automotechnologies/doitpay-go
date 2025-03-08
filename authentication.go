@@ -2,8 +2,8 @@ package doitpay
 
 import (
 	"context"
-	"net/url"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/automotechnologies/doitpay-go/v2/client"
@@ -26,6 +26,7 @@ type AccessToken struct {
 type DoitpayAuth struct {
     config ClientConfig
     accessToken *AccessToken
+    mu sync.Mutex
 }
 
 func NewDoitpayAuth(config ClientConfig) *DoitpayAuth {
@@ -34,6 +35,9 @@ func NewDoitpayAuth(config ClientConfig) *DoitpayAuth {
 
 // GetAccessToken retrieves an access token from the authentication service
 func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
+    a.mu.Lock()
+    defer a.mu.Unlock()
+
     if a.accessToken == nil || a.accessToken.ExpiresAt.Before(time.Now()) {
     
         timestamp := time.Now().UTC()
@@ -42,7 +46,7 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
             return "", err
         }
 
-        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"https"})
+        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"http"})
         authService := client.New(transport, strfmt.Default).Authentication
 
         resp, err := authService.AccessToken(&authentication.AccessTokenParams{
@@ -52,6 +56,8 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
             Request: &models.PartnerAccessTokenRequest{
                 GrantType: "client_credentials",
             },
+        }, func(op *runtime.ClientOperation) {
+            op.Schemes = []string{"http"}
         })
 
         if err != nil {
@@ -82,6 +88,7 @@ func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.
     headers := map[string]string{
         "X-CLIENT-KEY": a.config.ClientSecret,
         "X-TIMESTAMP":  timestamp.Format(time.RFC3339),
+        "X-PARTNER-ID": a.config.PartnerID,
         "X-SIGNATURE":  "",
     }
 
@@ -90,16 +97,12 @@ func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.
         return err
     }
 
-    endpointUrl, err := url.JoinPath(a.config.Host, a.config.BasePath, req.GetPath())
-    if err != nil {
-        return err
-    }
-
     // Generate signature
     signature, err := signature.GenerateSNAPSymmetricSignature(
         req.GetMethod(),
-        endpointUrl,
+        req.GetPath(),
         accessToken,
+        a.config.ClientSecret,
         timestamp,
         req.GetBody(),
     )

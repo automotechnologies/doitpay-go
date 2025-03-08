@@ -30,7 +30,7 @@ func GenerateSNAPAsymmetricSignature(clientSecret string, timestamp time.Time, p
 	return base64.StdEncoding.EncodeToString(signature), nil
 }
 
-func GenerateSNAPSymmetricSignature(httpMethod, endpointUrl, accessToken string, timestamp time.Time, body []byte) (string, error) {
+func GenerateSNAPSymmetricSignature(httpMethod, endpointUrl, accessToken, clientSecret string, timestamp time.Time, body []byte) (string, error) {
 	r := bytes.NewBuffer(body)
 	var w bytes.Buffer
 
@@ -50,7 +50,7 @@ func GenerateSNAPSymmetricSignature(httpMethod, endpointUrl, accessToken string,
 		timestamp.Format(time.RFC3339),
 	)
 
-	hm := hmac.New(sha512.New, []byte(accessToken))
+	hm := hmac.New(sha512.New, []byte(clientSecret))
 	if _, err := hm.Write([]byte(stringToSign)); err != nil {
 		return "", fmt.Errorf("failed to populate signature, err: %s", err)
 	}
