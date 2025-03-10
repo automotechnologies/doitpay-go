@@ -69,11 +69,11 @@ type PostDisbursementV10BankDisbursementParams struct {
 	*/
 	Request *models.CreateDisbursementRequest
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XSIGNATURE.
 
@@ -151,15 +151,15 @@ func (o *PostDisbursementV10BankDisbursementParams) SetRequest(request *models.C
 	o.Request = request
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 bank disbursement params
-func (o *PostDisbursementV10BankDisbursementParams) WithXCLIENTKEY(xCLIENTKEY string) *PostDisbursementV10BankDisbursementParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post disbursement v10 bank disbursement params
+func (o *PostDisbursementV10BankDisbursementParams) WithXEXTERNALID(xEXTERNALID string) *PostDisbursementV10BankDisbursementParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 bank disbursement params
-func (o *PostDisbursementV10BankDisbursementParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post disbursement v10 bank disbursement params
+func (o *PostDisbursementV10BankDisbursementParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXSIGNATURE adds the xSIGNATURE to the post disbursement v10 bank disbursement params
@@ -197,8 +197,8 @@ func (o *PostDisbursementV10BankDisbursementParams) WriteToRequest(r runtime.Cli
 		}
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 

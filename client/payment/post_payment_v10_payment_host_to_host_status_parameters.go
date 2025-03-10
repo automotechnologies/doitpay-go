@@ -75,11 +75,11 @@ type PostPaymentV10PaymentHostToHostStatusParams struct {
 	*/
 	XCHANNELID string
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XPARTNERID.
 
@@ -180,15 +180,15 @@ func (o *PostPaymentV10PaymentHostToHostStatusParams) SetXCHANNELID(xCHANNELID s
 	o.XCHANNELID = xCHANNELID
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post payment v10 payment host to host status params
-func (o *PostPaymentV10PaymentHostToHostStatusParams) WithXCLIENTKEY(xCLIENTKEY string) *PostPaymentV10PaymentHostToHostStatusParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post payment v10 payment host to host status params
+func (o *PostPaymentV10PaymentHostToHostStatusParams) WithXEXTERNALID(xEXTERNALID string) *PostPaymentV10PaymentHostToHostStatusParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post payment v10 payment host to host status params
-func (o *PostPaymentV10PaymentHostToHostStatusParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post payment v10 payment host to host status params
+func (o *PostPaymentV10PaymentHostToHostStatusParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXPARTNERID adds the xPARTNERID to the post payment v10 payment host to host status params
@@ -253,8 +253,8 @@ func (o *PostPaymentV10PaymentHostToHostStatusParams) WriteToRequest(r runtime.C
 		return err
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 

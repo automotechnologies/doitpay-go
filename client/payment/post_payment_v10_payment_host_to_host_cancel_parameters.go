@@ -69,11 +69,11 @@ type PostPaymentV10PaymentHostToHostCancelParams struct {
 	*/
 	Request *models.CancelHostToHostPaymentRequest
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XSIGNATURE.
 
@@ -151,15 +151,15 @@ func (o *PostPaymentV10PaymentHostToHostCancelParams) SetRequest(request *models
 	o.Request = request
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post payment v10 payment host to host cancel params
-func (o *PostPaymentV10PaymentHostToHostCancelParams) WithXCLIENTKEY(xCLIENTKEY string) *PostPaymentV10PaymentHostToHostCancelParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post payment v10 payment host to host cancel params
+func (o *PostPaymentV10PaymentHostToHostCancelParams) WithXEXTERNALID(xEXTERNALID string) *PostPaymentV10PaymentHostToHostCancelParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post payment v10 payment host to host cancel params
-func (o *PostPaymentV10PaymentHostToHostCancelParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post payment v10 payment host to host cancel params
+func (o *PostPaymentV10PaymentHostToHostCancelParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXSIGNATURE adds the xSIGNATURE to the post payment v10 payment host to host cancel params
@@ -197,8 +197,8 @@ func (o *PostPaymentV10PaymentHostToHostCancelParams) WriteToRequest(r runtime.C
 		}
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 

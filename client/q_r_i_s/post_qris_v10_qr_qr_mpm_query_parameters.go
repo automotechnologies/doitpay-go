@@ -69,11 +69,11 @@ type PostQrisV10QrQrMpmQueryParams struct {
 	*/
 	Request *models.QrisQueryPaymentRequest
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XSIGNATURE.
 
@@ -151,15 +151,15 @@ func (o *PostQrisV10QrQrMpmQueryParams) SetRequest(request *models.QrisQueryPaym
 	o.Request = request
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post qris v10 qr qr mpm query params
-func (o *PostQrisV10QrQrMpmQueryParams) WithXCLIENTKEY(xCLIENTKEY string) *PostQrisV10QrQrMpmQueryParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post qris v10 qr qr mpm query params
+func (o *PostQrisV10QrQrMpmQueryParams) WithXEXTERNALID(xEXTERNALID string) *PostQrisV10QrQrMpmQueryParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post qris v10 qr qr mpm query params
-func (o *PostQrisV10QrQrMpmQueryParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post qris v10 qr qr mpm query params
+func (o *PostQrisV10QrQrMpmQueryParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXSIGNATURE adds the xSIGNATURE to the post qris v10 qr qr mpm query params
@@ -197,8 +197,8 @@ func (o *PostQrisV10QrQrMpmQueryParams) WriteToRequest(r runtime.ClientRequest, 
 		}
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 

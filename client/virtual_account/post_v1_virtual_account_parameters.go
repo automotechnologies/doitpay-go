@@ -63,11 +63,11 @@ PostV1VirtualAccountParams contains all the parameters to send to the API endpoi
 */
 type PostV1VirtualAccountParams struct {
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* Body.
 
@@ -128,15 +128,15 @@ func (o *PostV1VirtualAccountParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post v1 virtual account params
-func (o *PostV1VirtualAccountParams) WithXCLIENTKEY(xCLIENTKEY string) *PostV1VirtualAccountParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post v1 virtual account params
+func (o *PostV1VirtualAccountParams) WithXEXTERNALID(xEXTERNALID string) *PostV1VirtualAccountParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post v1 virtual account params
-func (o *PostV1VirtualAccountParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post v1 virtual account params
+func (o *PostV1VirtualAccountParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithBody adds the body to the post v1 virtual account params
@@ -158,8 +158,8 @@ func (o *PostV1VirtualAccountParams) WriteToRequest(r runtime.ClientRequest, reg
 	}
 	var res []error
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 	if o.Body != nil {

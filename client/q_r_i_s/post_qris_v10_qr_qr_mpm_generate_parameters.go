@@ -75,11 +75,11 @@ type PostQrisV10QrQrMpmGenerateParams struct {
 	*/
 	XCHANNELID string
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XPARTNERID.
 
@@ -180,15 +180,15 @@ func (o *PostQrisV10QrQrMpmGenerateParams) SetXCHANNELID(xCHANNELID string) {
 	o.XCHANNELID = xCHANNELID
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post qris v10 qr qr mpm generate params
-func (o *PostQrisV10QrQrMpmGenerateParams) WithXCLIENTKEY(xCLIENTKEY string) *PostQrisV10QrQrMpmGenerateParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post qris v10 qr qr mpm generate params
+func (o *PostQrisV10QrQrMpmGenerateParams) WithXEXTERNALID(xEXTERNALID string) *PostQrisV10QrQrMpmGenerateParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post qris v10 qr qr mpm generate params
-func (o *PostQrisV10QrQrMpmGenerateParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post qris v10 qr qr mpm generate params
+func (o *PostQrisV10QrQrMpmGenerateParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXPARTNERID adds the xPARTNERID to the post qris v10 qr qr mpm generate params
@@ -253,8 +253,8 @@ func (o *PostQrisV10QrQrMpmGenerateParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 
