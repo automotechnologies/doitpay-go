@@ -63,11 +63,29 @@ PostV1VirtualAccountInquiryParams contains all the parameters to send to the API
 */
 type PostV1VirtualAccountInquiryParams struct {
 
-	/* XCLIENTKEY.
+	/* CHANNELID.
 
-	   Client Key
+	   Channel ID
 	*/
-	XCLIENTKEY string
+	CHANNELID string
+
+	/* XEXTERNALID.
+
+	   External ID
+	*/
+	XEXTERNALID string
+
+	/* XSIGNATURE.
+
+	   Request signature
+	*/
+	XSIGNATURE string
+
+	/* XTIMESTAMP.
+
+	   Request timestamp
+	*/
+	XTIMESTAMP string
 
 	/* Body.
 
@@ -128,15 +146,48 @@ func (o *PostV1VirtualAccountInquiryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post v1 virtual account inquiry params
-func (o *PostV1VirtualAccountInquiryParams) WithXCLIENTKEY(xCLIENTKEY string) *PostV1VirtualAccountInquiryParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithCHANNELID adds the cHANNELID to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) WithCHANNELID(cHANNELID string) *PostV1VirtualAccountInquiryParams {
+	o.SetCHANNELID(cHANNELID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post v1 virtual account inquiry params
-func (o *PostV1VirtualAccountInquiryParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetCHANNELID adds the cHANNELId to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
+// WithXEXTERNALID adds the xEXTERNALID to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) WithXEXTERNALID(xEXTERNALID string) *PostV1VirtualAccountInquiryParams {
+	o.SetXEXTERNALID(xEXTERNALID)
+	return o
+}
+
+// SetXEXTERNALID adds the xEXTERNALId to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
+}
+
+// WithXSIGNATURE adds the xSIGNATURE to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) WithXSIGNATURE(xSIGNATURE string) *PostV1VirtualAccountInquiryParams {
+	o.SetXSIGNATURE(xSIGNATURE)
+	return o
+}
+
+// SetXSIGNATURE adds the xSIGNATURE to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) SetXSIGNATURE(xSIGNATURE string) {
+	o.XSIGNATURE = xSIGNATURE
+}
+
+// WithXTIMESTAMP adds the xTIMESTAMP to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) WithXTIMESTAMP(xTIMESTAMP string) *PostV1VirtualAccountInquiryParams {
+	o.SetXTIMESTAMP(xTIMESTAMP)
+	return o
+}
+
+// SetXTIMESTAMP adds the xTIMESTAMP to the post v1 virtual account inquiry params
+func (o *PostV1VirtualAccountInquiryParams) SetXTIMESTAMP(xTIMESTAMP string) {
+	o.XTIMESTAMP = xTIMESTAMP
 }
 
 // WithBody adds the body to the post v1 virtual account inquiry params
@@ -158,8 +209,23 @@ func (o *PostV1VirtualAccountInquiryParams) WriteToRequest(r runtime.ClientReque
 	}
 	var res []error
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
+
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
+		return err
+	}
+
+	// header param X-SIGNATURE
+	if err := r.SetHeaderParam("X-SIGNATURE", o.XSIGNATURE); err != nil {
+		return err
+	}
+
+	// header param X-TIMESTAMP
+	if err := r.SetHeaderParam("X-TIMESTAMP", o.XTIMESTAMP); err != nil {
 		return err
 	}
 	if o.Body != nil {

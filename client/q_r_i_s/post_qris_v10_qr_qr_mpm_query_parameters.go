@@ -63,6 +63,12 @@ PostQrisV10QrQrMpmQueryParams contains all the parameters to send to the API end
 */
 type PostQrisV10QrQrMpmQueryParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Query request
@@ -140,6 +146,17 @@ func (o *PostQrisV10QrQrMpmQueryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post qris v10 qr qr mpm query params
+func (o *PostQrisV10QrQrMpmQueryParams) WithCHANNELID(cHANNELID string) *PostQrisV10QrQrMpmQueryParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post qris v10 qr qr mpm query params
+func (o *PostQrisV10QrQrMpmQueryParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post qris v10 qr qr mpm query params
 func (o *PostQrisV10QrQrMpmQueryParams) WithRequest(request *models.QrisQueryPaymentRequest) *PostQrisV10QrQrMpmQueryParams {
 	o.SetRequest(request)
@@ -191,6 +208,11 @@ func (o *PostQrisV10QrQrMpmQueryParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err

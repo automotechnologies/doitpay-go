@@ -63,17 +63,23 @@ PostDisbursementV10BankAccountValidationParams contains all the parameters to se
 */
 type PostDisbursementV10BankAccountValidationParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Bank account validation request
 	*/
 	Request *models.BankAccountValidationRequest
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XSIGNATURE.
 
@@ -140,6 +146,17 @@ func (o *PostDisbursementV10BankAccountValidationParams) SetHTTPClient(client *h
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post disbursement v10 bank account validation params
+func (o *PostDisbursementV10BankAccountValidationParams) WithCHANNELID(cHANNELID string) *PostDisbursementV10BankAccountValidationParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post disbursement v10 bank account validation params
+func (o *PostDisbursementV10BankAccountValidationParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post disbursement v10 bank account validation params
 func (o *PostDisbursementV10BankAccountValidationParams) WithRequest(request *models.BankAccountValidationRequest) *PostDisbursementV10BankAccountValidationParams {
 	o.SetRequest(request)
@@ -151,15 +168,15 @@ func (o *PostDisbursementV10BankAccountValidationParams) SetRequest(request *mod
 	o.Request = request
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 bank account validation params
-func (o *PostDisbursementV10BankAccountValidationParams) WithXCLIENTKEY(xCLIENTKEY string) *PostDisbursementV10BankAccountValidationParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post disbursement v10 bank account validation params
+func (o *PostDisbursementV10BankAccountValidationParams) WithXEXTERNALID(xEXTERNALID string) *PostDisbursementV10BankAccountValidationParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 bank account validation params
-func (o *PostDisbursementV10BankAccountValidationParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post disbursement v10 bank account validation params
+func (o *PostDisbursementV10BankAccountValidationParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXSIGNATURE adds the xSIGNATURE to the post disbursement v10 bank account validation params
@@ -191,14 +208,19 @@ func (o *PostDisbursementV10BankAccountValidationParams) WriteToRequest(r runtim
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
 		}
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 

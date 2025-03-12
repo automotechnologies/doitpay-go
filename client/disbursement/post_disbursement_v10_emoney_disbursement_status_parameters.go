@@ -63,17 +63,23 @@ PostDisbursementV10EmoneyDisbursementStatusParams contains all the parameters to
 */
 type PostDisbursementV10EmoneyDisbursementStatusParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Status inquiry request
 	*/
 	Request *models.InquiryEwalletTopupStatusRequest
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XSIGNATURE.
 
@@ -140,6 +146,17 @@ func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetHTTPClient(client
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post disbursement v10 emoney disbursement status params
+func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WithCHANNELID(cHANNELID string) *PostDisbursementV10EmoneyDisbursementStatusParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post disbursement v10 emoney disbursement status params
+func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post disbursement v10 emoney disbursement status params
 func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WithRequest(request *models.InquiryEwalletTopupStatusRequest) *PostDisbursementV10EmoneyDisbursementStatusParams {
 	o.SetRequest(request)
@@ -151,15 +168,15 @@ func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetRequest(request *
 	o.Request = request
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 emoney disbursement status params
-func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WithXCLIENTKEY(xCLIENTKEY string) *PostDisbursementV10EmoneyDisbursementStatusParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post disbursement v10 emoney disbursement status params
+func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WithXEXTERNALID(xEXTERNALID string) *PostDisbursementV10EmoneyDisbursementStatusParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 emoney disbursement status params
-func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post disbursement v10 emoney disbursement status params
+func (o *PostDisbursementV10EmoneyDisbursementStatusParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXSIGNATURE adds the xSIGNATURE to the post disbursement v10 emoney disbursement status params
@@ -191,14 +208,19 @@ func (o *PostDisbursementV10EmoneyDisbursementStatusParams) WriteToRequest(r run
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
 		}
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 

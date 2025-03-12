@@ -63,6 +63,12 @@ PostDisbursementV10BankDisbursementParams contains all the parameters to send to
 */
 type PostDisbursementV10BankDisbursementParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Disbursement request
@@ -140,6 +146,17 @@ func (o *PostDisbursementV10BankDisbursementParams) SetHTTPClient(client *http.C
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post disbursement v10 bank disbursement params
+func (o *PostDisbursementV10BankDisbursementParams) WithCHANNELID(cHANNELID string) *PostDisbursementV10BankDisbursementParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post disbursement v10 bank disbursement params
+func (o *PostDisbursementV10BankDisbursementParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post disbursement v10 bank disbursement params
 func (o *PostDisbursementV10BankDisbursementParams) WithRequest(request *models.CreateDisbursementRequest) *PostDisbursementV10BankDisbursementParams {
 	o.SetRequest(request)
@@ -191,6 +208,11 @@ func (o *PostDisbursementV10BankDisbursementParams) WriteToRequest(r runtime.Cli
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err

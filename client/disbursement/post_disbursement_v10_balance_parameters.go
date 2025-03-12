@@ -63,17 +63,23 @@ PostDisbursementV10BalanceParams contains all the parameters to send to the API 
 */
 type PostDisbursementV10BalanceParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Balance inquiry request
 	*/
 	Request *models.InquiryBalanceRequest
 
-	/* XCLIENTKEY.
+	/* XEXTERNALID.
 
-	   Client Key
+	   External ID
 	*/
-	XCLIENTKEY string
+	XEXTERNALID string
 
 	/* XSIGNATURE.
 
@@ -140,6 +146,17 @@ func (o *PostDisbursementV10BalanceParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post disbursement v10 balance params
+func (o *PostDisbursementV10BalanceParams) WithCHANNELID(cHANNELID string) *PostDisbursementV10BalanceParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post disbursement v10 balance params
+func (o *PostDisbursementV10BalanceParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post disbursement v10 balance params
 func (o *PostDisbursementV10BalanceParams) WithRequest(request *models.InquiryBalanceRequest) *PostDisbursementV10BalanceParams {
 	o.SetRequest(request)
@@ -151,15 +168,15 @@ func (o *PostDisbursementV10BalanceParams) SetRequest(request *models.InquiryBal
 	o.Request = request
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 balance params
-func (o *PostDisbursementV10BalanceParams) WithXCLIENTKEY(xCLIENTKEY string) *PostDisbursementV10BalanceParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithXEXTERNALID adds the xEXTERNALID to the post disbursement v10 balance params
+func (o *PostDisbursementV10BalanceParams) WithXEXTERNALID(xEXTERNALID string) *PostDisbursementV10BalanceParams {
+	o.SetXEXTERNALID(xEXTERNALID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the post disbursement v10 balance params
-func (o *PostDisbursementV10BalanceParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetXEXTERNALID adds the xEXTERNALId to the post disbursement v10 balance params
+func (o *PostDisbursementV10BalanceParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
 }
 
 // WithXSIGNATURE adds the xSIGNATURE to the post disbursement v10 balance params
@@ -191,14 +208,19 @@ func (o *PostDisbursementV10BalanceParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
 		}
 	}
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
 		return err
 	}
 
