@@ -63,17 +63,17 @@ PostPaymentV10PaymentHostToHostParams contains all the parameters to send to the
 */
 type PostPaymentV10PaymentHostToHostParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Payment request
 	*/
 	Request *models.CreateEwalletRequest
-
-	/* XCHANNELID.
-
-	   Channel ID
-	*/
-	XCHANNELID string
 
 	/* XEXTERNALID.
 
@@ -158,6 +158,17 @@ func (o *PostPaymentV10PaymentHostToHostParams) SetHTTPClient(client *http.Clien
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post payment v10 payment host to host params
+func (o *PostPaymentV10PaymentHostToHostParams) WithCHANNELID(cHANNELID string) *PostPaymentV10PaymentHostToHostParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post payment v10 payment host to host params
+func (o *PostPaymentV10PaymentHostToHostParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post payment v10 payment host to host params
 func (o *PostPaymentV10PaymentHostToHostParams) WithRequest(request *models.CreateEwalletRequest) *PostPaymentV10PaymentHostToHostParams {
 	o.SetRequest(request)
@@ -167,17 +178,6 @@ func (o *PostPaymentV10PaymentHostToHostParams) WithRequest(request *models.Crea
 // SetRequest adds the request to the post payment v10 payment host to host params
 func (o *PostPaymentV10PaymentHostToHostParams) SetRequest(request *models.CreateEwalletRequest) {
 	o.Request = request
-}
-
-// WithXCHANNELID adds the xCHANNELID to the post payment v10 payment host to host params
-func (o *PostPaymentV10PaymentHostToHostParams) WithXCHANNELID(xCHANNELID string) *PostPaymentV10PaymentHostToHostParams {
-	o.SetXCHANNELID(xCHANNELID)
-	return o
-}
-
-// SetXCHANNELID adds the xCHANNELId to the post payment v10 payment host to host params
-func (o *PostPaymentV10PaymentHostToHostParams) SetXCHANNELID(xCHANNELID string) {
-	o.XCHANNELID = xCHANNELID
 }
 
 // WithXEXTERNALID adds the xEXTERNALID to the post payment v10 payment host to host params
@@ -242,15 +242,15 @@ func (o *PostPaymentV10PaymentHostToHostParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
 		}
-	}
-
-	// header param X-CHANNEL-ID
-	if err := r.SetHeaderParam("X-CHANNEL-ID", o.XCHANNELID); err != nil {
-		return err
 	}
 
 	// header param X-EXTERNAL-ID

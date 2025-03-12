@@ -63,17 +63,17 @@ PostPaymentV10PaymentHostToHostStatusParams contains all the parameters to send 
 */
 type PostPaymentV10PaymentHostToHostStatusParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Status check request
 	*/
 	Request *models.CheckPaymentStatusEwalletRequest
-
-	/* XCHANNELID.
-
-	   Channel ID
-	*/
-	XCHANNELID string
 
 	/* XEXTERNALID.
 
@@ -158,6 +158,17 @@ func (o *PostPaymentV10PaymentHostToHostStatusParams) SetHTTPClient(client *http
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post payment v10 payment host to host status params
+func (o *PostPaymentV10PaymentHostToHostStatusParams) WithCHANNELID(cHANNELID string) *PostPaymentV10PaymentHostToHostStatusParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post payment v10 payment host to host status params
+func (o *PostPaymentV10PaymentHostToHostStatusParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post payment v10 payment host to host status params
 func (o *PostPaymentV10PaymentHostToHostStatusParams) WithRequest(request *models.CheckPaymentStatusEwalletRequest) *PostPaymentV10PaymentHostToHostStatusParams {
 	o.SetRequest(request)
@@ -167,17 +178,6 @@ func (o *PostPaymentV10PaymentHostToHostStatusParams) WithRequest(request *model
 // SetRequest adds the request to the post payment v10 payment host to host status params
 func (o *PostPaymentV10PaymentHostToHostStatusParams) SetRequest(request *models.CheckPaymentStatusEwalletRequest) {
 	o.Request = request
-}
-
-// WithXCHANNELID adds the xCHANNELID to the post payment v10 payment host to host status params
-func (o *PostPaymentV10PaymentHostToHostStatusParams) WithXCHANNELID(xCHANNELID string) *PostPaymentV10PaymentHostToHostStatusParams {
-	o.SetXCHANNELID(xCHANNELID)
-	return o
-}
-
-// SetXCHANNELID adds the xCHANNELId to the post payment v10 payment host to host status params
-func (o *PostPaymentV10PaymentHostToHostStatusParams) SetXCHANNELID(xCHANNELID string) {
-	o.XCHANNELID = xCHANNELID
 }
 
 // WithXEXTERNALID adds the xEXTERNALID to the post payment v10 payment host to host status params
@@ -242,15 +242,15 @@ func (o *PostPaymentV10PaymentHostToHostStatusParams) WriteToRequest(r runtime.C
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
 		}
-	}
-
-	// header param X-CHANNEL-ID
-	if err := r.SetHeaderParam("X-CHANNEL-ID", o.XCHANNELID); err != nil {
-		return err
 	}
 
 	// header param X-EXTERNAL-ID

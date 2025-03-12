@@ -63,6 +63,12 @@ PostPaymentV10PaymentHostToHostCancelParams contains all the parameters to send 
 */
 type PostPaymentV10PaymentHostToHostCancelParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   Cancel payment request
@@ -140,6 +146,17 @@ func (o *PostPaymentV10PaymentHostToHostCancelParams) SetHTTPClient(client *http
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post payment v10 payment host to host cancel params
+func (o *PostPaymentV10PaymentHostToHostCancelParams) WithCHANNELID(cHANNELID string) *PostPaymentV10PaymentHostToHostCancelParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post payment v10 payment host to host cancel params
+func (o *PostPaymentV10PaymentHostToHostCancelParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post payment v10 payment host to host cancel params
 func (o *PostPaymentV10PaymentHostToHostCancelParams) WithRequest(request *models.CancelHostToHostPaymentRequest) *PostPaymentV10PaymentHostToHostCancelParams {
 	o.SetRequest(request)
@@ -191,6 +208,11 @@ func (o *PostPaymentV10PaymentHostToHostCancelParams) WriteToRequest(r runtime.C
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
