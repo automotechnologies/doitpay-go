@@ -62,11 +62,29 @@ GetV1MerchantParams contains all the parameters to send to the API endpoint
 */
 type GetV1MerchantParams struct {
 
-	/* Authorization.
+	/* CHANNELID.
 
-	   Bearer token
+	   Channel ID
 	*/
-	Authorization string
+	CHANNELID string
+
+	/* XEXTERNALID.
+
+	   External ID
+	*/
+	XEXTERNALID string
+
+	/* XSIGNATURE.
+
+	   Request signature
+	*/
+	XSIGNATURE string
+
+	/* XTIMESTAMP.
+
+	   Request timestamp
+	*/
+	XTIMESTAMP string
 
 	/* Limit.
 
@@ -139,15 +157,48 @@ func (o *GetV1MerchantParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAuthorization adds the authorization to the get v1 merchant params
-func (o *GetV1MerchantParams) WithAuthorization(authorization string) *GetV1MerchantParams {
-	o.SetAuthorization(authorization)
+// WithCHANNELID adds the cHANNELID to the get v1 merchant params
+func (o *GetV1MerchantParams) WithCHANNELID(cHANNELID string) *GetV1MerchantParams {
+	o.SetCHANNELID(cHANNELID)
 	return o
 }
 
-// SetAuthorization adds the authorization to the get v1 merchant params
-func (o *GetV1MerchantParams) SetAuthorization(authorization string) {
-	o.Authorization = authorization
+// SetCHANNELID adds the cHANNELId to the get v1 merchant params
+func (o *GetV1MerchantParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
+// WithXEXTERNALID adds the xEXTERNALID to the get v1 merchant params
+func (o *GetV1MerchantParams) WithXEXTERNALID(xEXTERNALID string) *GetV1MerchantParams {
+	o.SetXEXTERNALID(xEXTERNALID)
+	return o
+}
+
+// SetXEXTERNALID adds the xEXTERNALId to the get v1 merchant params
+func (o *GetV1MerchantParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
+}
+
+// WithXSIGNATURE adds the xSIGNATURE to the get v1 merchant params
+func (o *GetV1MerchantParams) WithXSIGNATURE(xSIGNATURE string) *GetV1MerchantParams {
+	o.SetXSIGNATURE(xSIGNATURE)
+	return o
+}
+
+// SetXSIGNATURE adds the xSIGNATURE to the get v1 merchant params
+func (o *GetV1MerchantParams) SetXSIGNATURE(xSIGNATURE string) {
+	o.XSIGNATURE = xSIGNATURE
+}
+
+// WithXTIMESTAMP adds the xTIMESTAMP to the get v1 merchant params
+func (o *GetV1MerchantParams) WithXTIMESTAMP(xTIMESTAMP string) *GetV1MerchantParams {
+	o.SetXTIMESTAMP(xTIMESTAMP)
+	return o
+}
+
+// SetXTIMESTAMP adds the xTIMESTAMP to the get v1 merchant params
+func (o *GetV1MerchantParams) SetXTIMESTAMP(xTIMESTAMP string) {
+	o.XTIMESTAMP = xTIMESTAMP
 }
 
 // WithLimit adds the limit to the get v1 merchant params
@@ -191,8 +242,23 @@ func (o *GetV1MerchantParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	}
 	var res []error
 
-	// header param Authorization
-	if err := r.SetHeaderParam("Authorization", o.Authorization); err != nil {
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
+
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
+		return err
+	}
+
+	// header param X-SIGNATURE
+	if err := r.SetHeaderParam("X-SIGNATURE", o.XSIGNATURE); err != nil {
+		return err
+	}
+
+	// header param X-TIMESTAMP
+	if err := r.SetHeaderParam("X-TIMESTAMP", o.XTIMESTAMP); err != nil {
 		return err
 	}
 

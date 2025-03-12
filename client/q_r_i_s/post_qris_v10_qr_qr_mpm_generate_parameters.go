@@ -63,17 +63,17 @@ PostQrisV10QrQrMpmGenerateParams contains all the parameters to send to the API 
 */
 type PostQrisV10QrQrMpmGenerateParams struct {
 
+	/* CHANNELID.
+
+	   Channel ID
+	*/
+	CHANNELID string
+
 	/* Request.
 
 	   QRIS generation request
 	*/
 	Request *models.QrisRequestScheme
-
-	/* XCHANNELID.
-
-	   Channel ID
-	*/
-	XCHANNELID string
 
 	/* XEXTERNALID.
 
@@ -158,6 +158,17 @@ func (o *PostQrisV10QrQrMpmGenerateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCHANNELID adds the cHANNELID to the post qris v10 qr qr mpm generate params
+func (o *PostQrisV10QrQrMpmGenerateParams) WithCHANNELID(cHANNELID string) *PostQrisV10QrQrMpmGenerateParams {
+	o.SetCHANNELID(cHANNELID)
+	return o
+}
+
+// SetCHANNELID adds the cHANNELId to the post qris v10 qr qr mpm generate params
+func (o *PostQrisV10QrQrMpmGenerateParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
 // WithRequest adds the request to the post qris v10 qr qr mpm generate params
 func (o *PostQrisV10QrQrMpmGenerateParams) WithRequest(request *models.QrisRequestScheme) *PostQrisV10QrQrMpmGenerateParams {
 	o.SetRequest(request)
@@ -167,17 +178,6 @@ func (o *PostQrisV10QrQrMpmGenerateParams) WithRequest(request *models.QrisReque
 // SetRequest adds the request to the post qris v10 qr qr mpm generate params
 func (o *PostQrisV10QrQrMpmGenerateParams) SetRequest(request *models.QrisRequestScheme) {
 	o.Request = request
-}
-
-// WithXCHANNELID adds the xCHANNELID to the post qris v10 qr qr mpm generate params
-func (o *PostQrisV10QrQrMpmGenerateParams) WithXCHANNELID(xCHANNELID string) *PostQrisV10QrQrMpmGenerateParams {
-	o.SetXCHANNELID(xCHANNELID)
-	return o
-}
-
-// SetXCHANNELID adds the xCHANNELId to the post qris v10 qr qr mpm generate params
-func (o *PostQrisV10QrQrMpmGenerateParams) SetXCHANNELID(xCHANNELID string) {
-	o.XCHANNELID = xCHANNELID
 }
 
 // WithXEXTERNALID adds the xEXTERNALID to the post qris v10 qr qr mpm generate params
@@ -242,15 +242,15 @@ func (o *PostQrisV10QrQrMpmGenerateParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
+
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
 	if o.Request != nil {
 		if err := r.SetBodyParam(o.Request); err != nil {
 			return err
 		}
-	}
-
-	// header param X-CHANNEL-ID
-	if err := r.SetHeaderParam("X-CHANNEL-ID", o.XCHANNELID); err != nil {
-		return err
 	}
 
 	// header param X-EXTERNAL-ID
