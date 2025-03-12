@@ -7,6 +7,19 @@ import (
 	"github.com/automotechnologies/doitpay-go/v2/models"
 )
 
+// Parameter structs
+type GenerateQRISParams struct {
+	Request    *models.QrisRequestScheme
+	ExternalID string
+	ChannelID  string
+}
+
+type QueryQRISParams struct {
+	Request    *models.QrisQueryPaymentRequest
+	ExternalID string
+	ChannelID  string
+}
+
 // QrisClient is a client for the QRIS API
 type QrisClient struct {
 	qrisClient q_r_i_s.ClientService
@@ -20,10 +33,12 @@ func NewQrisClient(clientService q_r_i_s.ClientService) *QrisClient {
 }
 
 // GenerateQRISCode generates a QRIS code
-func (c *QrisClient) GenerateQRISCode(ctx context.Context, request *models.QrisRequestScheme) (*models.QrisResponseScheme, error) {
+func (c *QrisClient) GenerateQRISCode(ctx context.Context, params *GenerateQRISParams) (*models.QrisResponseScheme, error) {
 	result, err := c.qrisClient.PostQrisV10QrQrMpmGenerate(
 		&q_r_i_s.PostQrisV10QrQrMpmGenerateParams{
-			Request: request,
+			Request:     params.Request,
+			XEXTERNALID: params.ExternalID,
+			CHANNELID:  params.ChannelID,
 		},
 		nil,
 	)
@@ -34,10 +49,12 @@ func (c *QrisClient) GenerateQRISCode(ctx context.Context, request *models.QrisR
 }
 
 // QueryQRISCode queries a QRIS code
-func (c *QrisClient) QueryQRISCode(ctx context.Context, request *models.QrisQueryPaymentRequest) (*models.QrisQueryPaymentResponse, error) {
+func (c *QrisClient) QueryQRISCode(ctx context.Context, params *QueryQRISParams) (*models.QrisQueryPaymentResponse, error) {
 	result, err := c.qrisClient.PostQrisV10QrQrMpmQuery(
 		&q_r_i_s.PostQrisV10QrQrMpmQueryParams{
-			Request: request,
+			Request:     params.Request,
+			XEXTERNALID: params.ExternalID,
+			CHANNELID:   params.ChannelID,
 		},
 		nil,
 	)

@@ -7,6 +7,11 @@ import (
 	"github.com/automotechnologies/doitpay-go/v2/models"
 )
 
+// Parameter struct
+type SimulateQRISParams struct {
+	Request *models.QrisSimulateRequest
+}
+
 type SimulateClient struct {
 	simulate public_simulate.ClientService
 }
@@ -17,9 +22,9 @@ func NewSimulateClient(client public_simulate.ClientService) *SimulateClient {
 	}
 }
 
-func (c *SimulateClient) SimulateQrisPayment(ctx context.Context, request *models.QrisSimulateRequest) (*public_simulate.SimulatePaymentOK, error) {
+func (c *SimulateClient) SimulateQrisPayment(ctx context.Context, params *SimulateQRISParams) (*public_simulate.SimulatePaymentOK, error) {
 	res, err := c.simulate.SimulatePayment(&public_simulate.SimulatePaymentParams{
-		Request: request,
+		Request: params.Request,
 	},
 		nil,
 	)
