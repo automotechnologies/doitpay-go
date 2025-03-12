@@ -63,11 +63,29 @@ PutV1VirtualAccountParams contains all the parameters to send to the API endpoin
 */
 type PutV1VirtualAccountParams struct {
 
-	/* XCLIENTKEY.
+	/* CHANNELID.
 
-	   Client Key
+	   Channel ID
 	*/
-	XCLIENTKEY string
+	CHANNELID string
+
+	/* XEXTERNALID.
+
+	   External ID
+	*/
+	XEXTERNALID string
+
+	/* XSIGNATURE.
+
+	   Request signature
+	*/
+	XSIGNATURE string
+
+	/* XTIMESTAMP.
+
+	   Request timestamp
+	*/
+	XTIMESTAMP string
 
 	/* Body.
 
@@ -128,15 +146,48 @@ func (o *PutV1VirtualAccountParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithXCLIENTKEY adds the xCLIENTKEY to the put v1 virtual account params
-func (o *PutV1VirtualAccountParams) WithXCLIENTKEY(xCLIENTKEY string) *PutV1VirtualAccountParams {
-	o.SetXCLIENTKEY(xCLIENTKEY)
+// WithCHANNELID adds the cHANNELID to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) WithCHANNELID(cHANNELID string) *PutV1VirtualAccountParams {
+	o.SetCHANNELID(cHANNELID)
 	return o
 }
 
-// SetXCLIENTKEY adds the xCLIENTKEY to the put v1 virtual account params
-func (o *PutV1VirtualAccountParams) SetXCLIENTKEY(xCLIENTKEY string) {
-	o.XCLIENTKEY = xCLIENTKEY
+// SetCHANNELID adds the cHANNELId to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) SetCHANNELID(cHANNELID string) {
+	o.CHANNELID = cHANNELID
+}
+
+// WithXEXTERNALID adds the xEXTERNALID to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) WithXEXTERNALID(xEXTERNALID string) *PutV1VirtualAccountParams {
+	o.SetXEXTERNALID(xEXTERNALID)
+	return o
+}
+
+// SetXEXTERNALID adds the xEXTERNALId to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) SetXEXTERNALID(xEXTERNALID string) {
+	o.XEXTERNALID = xEXTERNALID
+}
+
+// WithXSIGNATURE adds the xSIGNATURE to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) WithXSIGNATURE(xSIGNATURE string) *PutV1VirtualAccountParams {
+	o.SetXSIGNATURE(xSIGNATURE)
+	return o
+}
+
+// SetXSIGNATURE adds the xSIGNATURE to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) SetXSIGNATURE(xSIGNATURE string) {
+	o.XSIGNATURE = xSIGNATURE
+}
+
+// WithXTIMESTAMP adds the xTIMESTAMP to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) WithXTIMESTAMP(xTIMESTAMP string) *PutV1VirtualAccountParams {
+	o.SetXTIMESTAMP(xTIMESTAMP)
+	return o
+}
+
+// SetXTIMESTAMP adds the xTIMESTAMP to the put v1 virtual account params
+func (o *PutV1VirtualAccountParams) SetXTIMESTAMP(xTIMESTAMP string) {
+	o.XTIMESTAMP = xTIMESTAMP
 }
 
 // WithBody adds the body to the put v1 virtual account params
@@ -158,8 +209,23 @@ func (o *PutV1VirtualAccountParams) WriteToRequest(r runtime.ClientRequest, reg 
 	}
 	var res []error
 
-	// header param X-CLIENT-KEY
-	if err := r.SetHeaderParam("X-CLIENT-KEY", o.XCLIENTKEY); err != nil {
+	// header param CHANNEL-ID
+	if err := r.SetHeaderParam("CHANNEL-ID", o.CHANNELID); err != nil {
+		return err
+	}
+
+	// header param X-EXTERNAL-ID
+	if err := r.SetHeaderParam("X-EXTERNAL-ID", o.XEXTERNALID); err != nil {
+		return err
+	}
+
+	// header param X-SIGNATURE
+	if err := r.SetHeaderParam("X-SIGNATURE", o.XSIGNATURE); err != nil {
+		return err
+	}
+
+	// header param X-TIMESTAMP
+	if err := r.SetHeaderParam("X-TIMESTAMP", o.XTIMESTAMP); err != nil {
 		return err
 	}
 	if o.Body != nil {
