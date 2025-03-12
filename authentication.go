@@ -90,7 +90,6 @@ func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.
         "X-TIMESTAMP":  timestamp.Format(time.RFC3339),
         "X-PARTNER-ID": a.config.PartnerID,
         "X-SIGNATURE":  "",
-        "CHANNEL-ID":   "47",
     }
 
     accessToken, err := a.GetAccessToken(context.Background())
