@@ -19,7 +19,7 @@ import (
 type GenericVirtualAccountData struct {
 
 	// additional info
-	AdditionalInfo *GenericVirtualAccountAdditionalInfo `json:"additionalInfo,omitempty"`
+	AdditionalInfo *Apiv1GenericVirtualAccountAdditionalInfo `json:"additionalInfo,omitempty"`
 
 	// customer no
 	CustomerNo string `json:"customerNo,omitempty"`
