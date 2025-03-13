@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go/models"
 )
 
 // PostPaymentV10PaymentHostToHostStatusReader is a Reader for the PostPaymentV10PaymentHostToHostStatus structure.

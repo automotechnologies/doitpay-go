@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/automotechnologies/doitpay-go/v2/client"
+	"github.com/automotechnologies/doitpay-go/client"
 
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
@@ -105,8 +105,7 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	cfg.PrivateKey = rsaPrivateKey
 
 	// Create transport with auth
-	fmt.Println(cfg.Host, cfg.BasePath)
-	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https"})
+	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https", "http"})
 
 	// Need to use default authentication that follows SNAP flows.
 	transport.DefaultAuthentication = NewDoitpayAuth(cfg)
@@ -114,7 +113,6 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	// Create base client
 	baseClient := client.New(transport, strfmt.Default)
 
-	fmt.Println(cfg.Host)
 	qrisClient := NewQrisClient(baseClient.Qris)
 	disbursementClient := NewDisbursementClient(baseClient.Disbursement)
 	simulateClient := NewSimulateClient(baseClient.PublicSimulate)

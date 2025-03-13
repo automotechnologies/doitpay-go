@@ -12,8 +12,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/automotechnologies/doitpay-go/v2"
-	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go"
+	"github.com/automotechnologies/doitpay-go/models"
 	"github.com/oklog/ulid"
 )
 

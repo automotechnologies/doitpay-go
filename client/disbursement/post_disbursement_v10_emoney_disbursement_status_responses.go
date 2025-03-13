@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go/models"
 )
 
 // PostDisbursementV10EmoneyDisbursementStatusReader is a Reader for the PostDisbursementV10EmoneyDisbursementStatus structure.

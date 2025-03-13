@@ -56,34 +56,34 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetV1Merchant(params *GetV1MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetV1MerchantOK, error)
+	GetAPIV10Merchant(params *GetAPIV10MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAPIV10MerchantOK, error)
 
-	GetV1MerchantMerchantRef(params *GetV1MerchantMerchantRefParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetV1MerchantMerchantRefOK, error)
+	GetAPIV10MerchantMerchantRef(params *GetAPIV10MerchantMerchantRefParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAPIV10MerchantMerchantRefOK, error)
 
-	PostV1Merchant(params *PostV1MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1MerchantCreated, error)
+	PostAPIV10Merchant(params *PostAPIV10MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIV10MerchantCreated, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetV1Merchant lists merchants
+GetAPIV10Merchant lists merchants
 
 Retrieves a paginated list of merchants with optional search and filtering
 */
-func (a *Client) GetV1Merchant(params *GetV1MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetV1MerchantOK, error) {
+func (a *Client) GetAPIV10Merchant(params *GetAPIV10MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAPIV10MerchantOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetV1MerchantParams()
+		params = NewGetAPIV10MerchantParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetV1Merchant",
+		ID:                 "GetAPIV10Merchant",
 		Method:             "GET",
-		PathPattern:        "/v1/merchant",
+		PathPattern:        "/api/v1.0/merchant",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetV1MerchantReader{formats: a.formats},
+		Reader:             &GetAPIV10MerchantReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -96,35 +96,35 @@ func (a *Client) GetV1Merchant(params *GetV1MerchantParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetV1MerchantOK)
+	success, ok := result.(*GetAPIV10MerchantOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetV1Merchant: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetAPIV10Merchant: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetV1MerchantMerchantRef gets merchant details
+GetAPIV10MerchantMerchantRef gets merchant details
 
 Retrieves detailed information about a specific merchant including balance and QR NMID details
 */
-func (a *Client) GetV1MerchantMerchantRef(params *GetV1MerchantMerchantRefParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetV1MerchantMerchantRefOK, error) {
+func (a *Client) GetAPIV10MerchantMerchantRef(params *GetAPIV10MerchantMerchantRefParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAPIV10MerchantMerchantRefOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetV1MerchantMerchantRefParams()
+		params = NewGetAPIV10MerchantMerchantRefParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetV1MerchantMerchantRef",
+		ID:                 "GetAPIV10MerchantMerchantRef",
 		Method:             "GET",
-		PathPattern:        "/v1/merchant/{merchant_ref}",
+		PathPattern:        "/api/v1.0/merchant/{merchant_ref}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetV1MerchantMerchantRefReader{formats: a.formats},
+		Reader:             &GetAPIV10MerchantMerchantRefReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -137,35 +137,35 @@ func (a *Client) GetV1MerchantMerchantRef(params *GetV1MerchantMerchantRefParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetV1MerchantMerchantRefOK)
+	success, ok := result.(*GetAPIV10MerchantMerchantRefOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetV1MerchantMerchantRef: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetAPIV10MerchantMerchantRef: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PostV1Merchant creates a new merchant
+PostAPIV10Merchant creates a new merchant
 
 Creates a new merchant with the provided information and initializes their balance and QR NMID
 */
-func (a *Client) PostV1Merchant(params *PostV1MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1MerchantCreated, error) {
+func (a *Client) PostAPIV10Merchant(params *PostAPIV10MerchantParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIV10MerchantCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostV1MerchantParams()
+		params = NewPostAPIV10MerchantParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostV1Merchant",
+		ID:                 "PostAPIV10Merchant",
 		Method:             "POST",
-		PathPattern:        "/v1/merchant",
+		PathPattern:        "/api/v1.0/merchant",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostV1MerchantReader{formats: a.formats},
+		Reader:             &PostAPIV10MerchantReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -178,13 +178,13 @@ func (a *Client) PostV1Merchant(params *PostV1MerchantParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostV1MerchantCreated)
+	success, ok := result.(*PostAPIV10MerchantCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1Merchant: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PostAPIV10Merchant: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
