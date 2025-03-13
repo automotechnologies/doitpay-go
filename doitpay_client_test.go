@@ -1,0 +1,84 @@
+package doitpay
+
+import (
+	"context"
+	"fmt"
+	"github.com/stretchr/testify/require"
+	"testing"
+)
+
+var privateStr = `-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDKPF/4klfFUY9S
+ZoBWWzn6DKjs06YVwIZpUAGOPe8BbSbWO7qepn9gKfsgYwpH/ofyXoNUG68T0jn2
+FSefMkjKQEC0WNofCZi8lkjdpsIrCgT9X55aQkqdFo7rkq2qlnoBGkhVqP7yJ/3A
+sz7cDbI+gNcogzjm1btWlphD9mID7ghSK47ARg5kZzu7cqhYd6n2LdELnWWQER8Z
+bvpOKx91JA4fypJrlnw3F/5qdBEVhNYeiUFUVtRpycOC1JNe/eYJEnEvK67P9llu
+B1hWgssc5bbPpBYt14rUk8WttcRvWGWN9j9+b3FcY9ZKusBs+OKW4d9A0Zvx/z2j
+nzkfX+JFAgMBAAECggEAAr7PvWEciJTd3DbWAStwiGDJnkVqmMWp+B4E7LhnLolx
+IIa5DCmjIFwRiP6vMgurhB0dAp70QSb2cHfDDO8y0RlkMiPj+iM4NpSCXWKZJNpt
+oj7nuGlJTVlJYWX2rj0oCix1f5bcDHosgK7Y6Jsq/fGOeiyl228FVwc+U+sxU2+j
+7b30dwEeuwnlD0Vx1qS2LKRKugAcLyRwdhwIw4xTVQcF1S++srx1/GbE/Ew/95Ud
+sktc+HK2QS5GjKc+74a8UVjws+An/UYtTc4YGfOztVhHOoVwVNiqnJwHiYR4UlNu
+8QYwM9AuWHiSY+c9+JFm5OqKNm9qISGe2wBtsyV6YQKBgQD0Zw0ReP8Djd96Di+0
+gs/9ZzB79Oh8b10ydBiGmrjNb2EFRX8ZTqcgyToVhtZaBysOtJnuzrCYLnAoLIQF
+8P5T6xSIVjBwvR/+9IXLBWj1HQNS/EpXbJQrmqH/0+l3Xn6YzH/bRUc1Vz/2Fr+s
++SdFjDvq8WyBY1EjV9tDsOmebQKBgQDT1ReGHUowGovy1X9Aiscv3KSyI5s/ebmy
+jfvAdURpOoJtaJBfv6imqr99J+++M7vqsFHxmvAtG6QdhAeVKyS8M06Pgb0IJA3q
+EPBcrJDGEGLAolZVpRCAJF7iFaXKAdzKzTkJMs/yKz4ZzsyXxnywzgAUEMXplDgh
+NvdDiJiMOQKBgBCOyrvcTqqW+gTy4RiBpEWusAI13WpQwSeh5ed4o/yHBzOsOagl
+Q/1cpKrAr9T5l1kvsx4SsrQcsUyHd4pPgWt+Ca4S6MU6iuhi+I2AmFPC227L2N2D
+ZaZum3sRiEemBz2i3Sal0uUyPAsYD3RQjPCRR53rLUa2y9BxK1GysqEhAoGBANCa
+djHyQg6g9dRK/qd2grTVWbK7cbTOkFoPjC14zce6gJpxcEt6GAEZAL2lSGhL1fBF
+dkywwXgKUlFmpXj2JZTYCbM0lgygRLuNtsXsgh0qIbWFp/NrO5aVOoL1wm/t6Zol
+AtfWHAVlJCCSD9Qe+Me79UPNSLi+5499632r1F2xAoGBAKUn+ykYZo97MBnp/ulb
+WU+xHL50EoKBa7ECBNdoZs4wqS+ck6GoF6/zPFwJFYsf9UhKz5PoYCBrmPAEcq7F
+9maohX6OcsfQ/vC4tbchl/vSocJzoQWzc/jgZScXsRBlmLkX+j4DvfjradupQHdT
+o98GUx9t8T5ZNaeZtA1AW86j
+-----END PRIVATE KEY-----`
+
+var privKeyStr2 string = `-----BEGIN PRIVATE KEY-----
+MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFCdSz/3uQAoxF
+Bhg1ZE0w5FQERfVaqL84fcEmmmdK7lpkO/echhSkZokEeptHeDzjCnClc3Iu1UzI
+9zIvupI5U+/tOuNdGvnMtXG5aDYeH60MZ3zPo/tk8SFTrbFbuwGLtZNoftfsHfvt
+6wDhHHjz+4yhEIOIEGKPlk9s5M6rosL1N4bF3KLnMEUnaQOiyPx+FxwQpa/ot6tx
+iHpuIykrY3t37dNOUkOW4I+V7oVoCGG5p4lkAFWyqsciioJ+DRMR2Ee7y+QASDIp
+h4vouv+XGi97aAFH5Qxdc+1U+C8snctBryt/BQMG6WC3splCm/j2VrizfYr4MKZc
+NVIHIh7fAgMBAAECggEABpkKLM7QweU78jG+jMcjiJAUuiHnkdYVtRwM5DCGZe1u
+TG3voCejOFAQpXw/h9igXU/jrr6bY7MTw6T3Yr7CF7ZWUeDHbT4ygCbRPI6fRUn1
+PvWWKdPJXrtuTMGDr1knN5joazbYHxlv7qsQV/lemXjiYCBP7zXxPvKfDTvqKbgV
+7p+sd/JX0F61sOjwYOWdZrXcGte43haZwxEmwDTAPOydOMdCVCGd9DHTKvXRzY4I
+yPjtFojXXRRjX1rpn5b4yE5K8K3z0CrI7J0YUz+7XAAbRB9tmYsjJCVGiGes5FaJ
+AaEkqUpndHYAIfu4oNWTp6gtXDevgYJu2M4+Eg8bHQKBgQDyNi6Gq+RNKD2eK63X
+5QgUcISyLIRG/JwE1tgV4nG2qYmSkyl+sFRqM1YKOpj7OJFjx4IglGi30fN2GtPa
+I0cISLgAIXtn1s6Ku+n62d+GPsRpwz9tI0bwSRN+Gtq7wlmuGFrS+ktON5GcXpQs
+i8JVTbdY+LR8fMMAvFTWlSDf/QKBgQDQQVOmJWycH1xVuA5P+1kqRnghIglLx9T5
+pKxUwWmnCj0MuCYEUBJ8umqwqTP4f2SFUtQm57+GUpm//85XVlRgYNPXgBRZnjxX
+TD/1OYvnCEFTmpBRTYk089bvd+sFaFmJzn7zCTz5IJkzHTvAHcZGmU1OEZJRtg4B
+oz/cwk0rCwKBgQCK2ARTrrVwhWDNCrzcxa2cCeQHPv2Us7m8DGxSHzyQOR9jpnhi
+5zF8r3Di7DRFzmeJixRNGMXumau2SCqpIQ/W79iKOqdDHx/G53F5GuvHSLPO7N2u
+8kn38+v4nexFNWOzKMLnrhL9A121BYJrBrKfs60mk2ri8aHXCh6X42S1AQKBgQCj
+TPaI7AO0kKrY1JD0isWqbsO4R3Y+pB4O+9/ePiPYxiCFHslAzIESqSMMEEIec9ag
+7QhK0aLPc2n4smBc/+b+BC9ZZqeOdpQeaD4mzs8zhLelFShheIlEqog6EzCJdv/v
+HatSbEYRnExFVoEJ7s8RgRirRQAVbsqg4iArvXjBbQKBgQDT6RZwBLuxSnsNWQ9z
+FiAr47gOw2ylFYmMl9ZXR/ZLfHnSp/KshGgUVgkcjwy0iBz2PPncK7fHq+5ycDrL
+f05TMB/CNoNJfrklhX3K8C+6VIoOwDOIeDMMQE6VZJCgAnc9JGro8pSFuWCpKt4G
+ovrOKGGq1mcSnoSGbMu0lM2MtQ==
+-----END PRIVATE KEY-----`
+
+func TestNewClient(t *testing.T) {
+	clientKey := "01J20VM8W11EP9M6KBHHJZMHPW"
+	projectId := "01J20VM8TNRK9VBMGJAQDBSF8X"
+	dtp, err := NewClient(
+		projectId,
+		clientKey,
+		privKeyStr2,
+		WithHost("rest.doitpay.dev"),
+	)
+	require.NoError(t, err)
+	fmt.Println(dtp)
+
+	ctx := context.Background()
+	resp, err := dtp.Merchant().GetMerchants(ctx, &GetMerchantParams{})
+	require.NoError(t, err)
+	require.NotNil(t, resp)
+}

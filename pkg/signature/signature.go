@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto"
 	"crypto/hmac"
-	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/sha512"
@@ -19,15 +18,21 @@ import (
 
 // GenerateSNAPAsymmetricSignature generates a signature for the given client secret and timestamp using the private key
 func GenerateSNAPAsymmetricSignature(clientSecret string, timestamp time.Time, privateKey *rsa.PrivateKey) (string, error) {
-	data := fmt.Sprintf("%s|%s", clientSecret, timestamp.Format(time.RFC3339))
+	data := fmt.Sprintf("%s|%s", clientSecret, timestamp.Format("2006-01-02T15:04:05-07:00"))
 
-	// generate signature using PKCS1 private key
-	dataHash := sha256.Sum256([]byte(data))
-	signature, err := rsa.SignPKCS1v15(rand.Reader, privateKey, crypto.SHA256, dataHash[:])
+	dataHash := sha256.New()
+	_, err := dataHash.Write([]byte(data))
 	if err != nil {
-		return "", fmt.Errorf("failed to populate signature, err: %s", err)
+		return "", err
 	}
-	return base64.StdEncoding.EncodeToString(signature), nil
+
+	msgHashSum := dataHash.Sum(nil)
+	signatureByte, err := rsa.SignPKCS1v15(nil, privateKey, crypto.SHA256, msgHashSum)
+	if err != nil {
+		return "", err
+	}
+
+	return base64.StdEncoding.EncodeToString(signatureByte), nil
 }
 
 func GenerateSNAPSymmetricSignature(httpMethod, endpointUrl, accessToken, clientSecret string, timestamp time.Time, body []byte) (string, error) {
@@ -57,4 +62,3 @@ func GenerateSNAPSymmetricSignature(httpMethod, endpointUrl, accessToken, client
 
 	return base64.StdEncoding.EncodeToString(hm.Sum(nil)), nil
 }
-

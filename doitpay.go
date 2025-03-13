@@ -74,14 +74,13 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	}
 
 	// validate privateKeyPath
-	if _, err := os.Stat(privateKeyPath); os.IsNotExist(err) {
-		return nil, fmt.Errorf("private key file does not exist: %s", privateKeyPath)
-	}
-
-	// read private key
-	privateKeyBytes, err := os.ReadFile(privateKeyPath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read private key: %s", err)
+	privateKeyBytes := []byte(privateKeyPath)
+	if _, err := os.Stat(privateKeyPath); os.IsExist(err) {
+		// read private key
+		privateKeyBytes, err = os.ReadFile(privateKeyPath)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read private key: %s", err)
+		}
 	}
 
 	// parse private key
@@ -106,7 +105,8 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	cfg.PrivateKey = rsaPrivateKey
 
 	// Create transport with auth
-	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"http"})
+	fmt.Println(cfg.Host, cfg.BasePath)
+	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https"})
 
 	// Need to use default authentication that follows SNAP flows.
 	transport.DefaultAuthentication = NewDoitpayAuth(cfg)
@@ -114,6 +114,7 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	// Create base client
 	baseClient := client.New(transport, strfmt.Default)
 
+	fmt.Println(cfg.Host)
 	qrisClient := NewQrisClient(baseClient.Qris)
 	disbursementClient := NewDisbursementClient(baseClient.Disbursement)
 	simulateClient := NewSimulateClient(baseClient.PublicSimulate)
