@@ -95,10 +95,15 @@ func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.
         return err
     }
 
+    endpoint := req.GetPath()
+    if params := req.GetQueryParams(); len(params) > 0 {
+        endpoint = endpoint + "?" + params.Encode()
+    }
+
     // Generate signature
     signature, err := signature.GenerateSNAPSymmetricSignature(
         req.GetMethod(),
-        req.GetPath(),
+        endpoint,
         accessToken,
         a.config.ClientSecret,
         timestamp,
