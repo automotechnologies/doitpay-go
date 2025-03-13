@@ -106,7 +106,7 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	cfg.PrivateKey = rsaPrivateKey
 
 	// Create transport with auth
-	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"http"})
+	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https", "http"})
 
 	// Need to use default authentication that follows SNAP flows.
 	transport.DefaultAuthentication = NewDoitpayAuth(cfg)
