@@ -18,124 +18,139 @@ type ClientOption func(*ClientConfig)
 
 // WithHost sets a custom host
 func WithHost(host string) ClientOption {
-    return func(c *ClientConfig) {
-        c.Host = host
-    }
+	return func(c *ClientConfig) {
+		c.Host = host
+	}
 }
 
 // WithBasePath sets a custom base path
 func WithBasePath(basePath string) ClientOption {
-    return func(c *ClientConfig) {
-        c.BasePath = basePath
-    }
+	return func(c *ClientConfig) {
+		c.BasePath = basePath
+	}
 }
 
 // DefaultConfig provides the default configuration for the client
 func DefaultConfig() ClientConfig {
-    return ClientConfig{
-        Host:     client.DefaultHost, // example default
-        BasePath: client.DefaultBasePath,             // example default
-    }
+	return ClientConfig{
+		Host:     client.DefaultHost,     // example default
+		BasePath: client.DefaultBasePath, // example default
+	}
 }
 
 // DoitpayClient wraps the generated client with custom auth
 type DoitpayClient struct {
-    doitpay *client.Doitpay
-    config ClientConfig
+	doitpay *client.Doitpay
+	config  ClientConfig
 
-    // Services
-    qris *QrisClient
-    disbursement *DisbursementClient
-    simulate *SimulateClient
+	// Services
+	qris           *QrisClient
+	disbursement   *DisbursementClient
+	simulate       *SimulateClient
+	merchant       *MerchantClient
+	virtualAccount *VirtualAccountClient
 }
 
 type ClientConfig struct {
-    Host      string
-    BasePath  string
-    ClientSecret string
-    PartnerID string
-    PrivateKey *rsa.PrivateKey
+	Host         string
+	BasePath     string
+	ClientSecret string
+	PartnerID    string
+	PrivateKey   *rsa.PrivateKey
 }
+
 // NewClient creates a new authenticated client with optional configurations
 func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOption) (*DoitpayClient, error) {
-    // Start with default config
-    cfg := DefaultConfig()
-    
-    // Apply required credentials
-    cfg.PartnerID = partnerID
-    cfg.ClientSecret = clientSecret
-    
-    // Apply any custom options
-    for _, opt := range opts {
-        opt(&cfg)
-    }
+	// Start with default config
+	cfg := DefaultConfig()
 
+	// Apply required credentials
+	cfg.PartnerID = partnerID
+	cfg.ClientSecret = clientSecret
 
-    // validate privateKeyPath
-    if _, err := os.Stat(privateKeyPath); os.IsNotExist(err) {
-        return nil, fmt.Errorf("private key file does not exist: %s", privateKeyPath)
-    }
+	// Apply any custom options
+	for _, opt := range opts {
+		opt(&cfg)
+	}
 
-    // read private key
-    privateKeyBytes, err := os.ReadFile(privateKeyPath)
-    if err != nil {
-        return nil, fmt.Errorf("failed to read private key: %s", err)
-    }
+	// validate privateKeyPath
+	if _, err := os.Stat(privateKeyPath); os.IsNotExist(err) {
+		return nil, fmt.Errorf("private key file does not exist: %s", privateKeyPath)
+	}
 
-    // parse private key
-    privatePem, _ := pem.Decode(privateKeyBytes)
-    if privatePem == nil {
-        return nil, fmt.Errorf("failed to decode private key")
-    }
+	// read private key
+	privateKeyBytes, err := os.ReadFile(privateKeyPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read private key: %s", err)
+	}
 
-    if privatePem.Type != "RSA PRIVATE KEY" && privatePem.Type != "ENCRYPTED PRIVATE KEY" && privatePem.Type != "PRIVATE KEY" {
-        return nil, fmt.Errorf("private key is not a valid PEM file")
-    }
+	// parse private key
+	privatePem, _ := pem.Decode(privateKeyBytes)
+	if privatePem == nil {
+		return nil, fmt.Errorf("failed to decode private key")
+	}
 
-    parsedKey, err := x509.ParsePKCS8PrivateKey(privatePem.Bytes)
-    if err != nil {
-        return nil, fmt.Errorf("failed to parse private key: %s", err)
-    }
+	if privatePem.Type != "RSA PRIVATE KEY" && privatePem.Type != "ENCRYPTED PRIVATE KEY" && privatePem.Type != "PRIVATE KEY" {
+		return nil, fmt.Errorf("private key is not a valid PEM file")
+	}
 
-    rsaPrivateKey, ok := parsedKey.(*rsa.PrivateKey)
-    if !ok {
-        return nil, fmt.Errorf("private key is not an RSA private key")
-    }
-    cfg.PrivateKey = rsaPrivateKey
+	parsedKey, err := x509.ParsePKCS8PrivateKey(privatePem.Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse private key: %s", err)
+	}
 
-    // Create transport with auth
-    transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"http"})
-    
-    // Need to use default authentication that follows SNAP flows.
-    transport.DefaultAuthentication = NewDoitpayAuth(cfg)
+	rsaPrivateKey, ok := parsedKey.(*rsa.PrivateKey)
+	if !ok {
+		return nil, fmt.Errorf("private key is not an RSA private key")
+	}
+	cfg.PrivateKey = rsaPrivateKey
 
-    // Create base client
-    baseClient := client.New(transport, strfmt.Default)
+	// Create transport with auth
+	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"http"})
 
+	// Need to use default authentication that follows SNAP flows.
+	transport.DefaultAuthentication = NewDoitpayAuth(cfg)
 
-    qrisClient := NewQrisClient(baseClient.Qris)
-    disbursementClient := NewDisbursementClient(baseClient.Disbursement)
-    simulateClient := NewSimulateClient(baseClient.PublicSimulate)
-    return &DoitpayClient{
-        doitpay: baseClient,
-        config:  cfg,
-        qris: qrisClient,
-        disbursement: disbursementClient,
-        simulate: simulateClient,
-    }, nil
+	// Create base client
+	baseClient := client.New(transport, strfmt.Default)
+
+	qrisClient := NewQrisClient(baseClient.Qris)
+	disbursementClient := NewDisbursementClient(baseClient.Disbursement)
+	simulateClient := NewSimulateClient(baseClient.PublicSimulate)
+	merchant := NewMerchantClient(baseClient.Merchants)
+	virtualAccount := NewVirtualAccountClient(baseClient.VirtualAccount)
+	return &DoitpayClient{
+		doitpay:        baseClient,
+		config:         cfg,
+		qris:           qrisClient,
+		disbursement:   disbursementClient,
+		simulate:       simulateClient,
+		merchant:       merchant,
+		virtualAccount: virtualAccount,
+	}, nil
 }
 
 // Qris returns the QRIS client
 func (c *DoitpayClient) Qris() *QrisClient {
-    return c.qris
+	return c.qris
 }
 
 // Disbursement returns the Disbursement client
 func (c *DoitpayClient) Disbursement() *DisbursementClient {
-    return c.disbursement
+	return c.disbursement
 }
 
 // Simulate returns the Simulate client
 func (c *DoitpayClient) Simulate() *SimulateClient {
-    return c.simulate
+	return c.simulate
+}
+
+// Merchant return the Merchant client
+func (c *DoitpayClient) Merchant() *MerchantClient {
+	return c.merchant
+}
+
+// VirtualAccount return the VA client
+func (c *DoitpayClient) VirtualAccount() *VirtualAccountClient {
+	return c.virtualAccount
 }
