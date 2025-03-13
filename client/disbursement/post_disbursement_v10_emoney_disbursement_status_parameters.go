@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go/models"
 )
 
 // NewPostDisbursementV10EmoneyDisbursementStatusParams creates a new PostDisbursementV10EmoneyDisbursementStatusParams object,

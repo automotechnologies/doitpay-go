@@ -3,8 +3,8 @@ package doitpay
 import (
 	"context"
 
-	"github.com/automotechnologies/doitpay-go/v2/client/merchants"
-	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go/client/merchants"
+	"github.com/automotechnologies/doitpay-go/models"
 )
 
 type MerchantClient struct {

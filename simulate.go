@@ -3,8 +3,8 @@ package doitpay
 import (
 	"context"
 
-	"github.com/automotechnologies/doitpay-go/v2/client/public_simulate"
-	"github.com/automotechnologies/doitpay-go/v2/models"
+	"github.com/automotechnologies/doitpay-go/client/public_simulate"
+	"github.com/automotechnologies/doitpay-go/models"
 )
 
 // Parameter struct

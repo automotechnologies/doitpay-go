@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/automotechnologies/doitpay-go/v2/client"
+	"github.com/automotechnologies/doitpay-go/client"
 
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
