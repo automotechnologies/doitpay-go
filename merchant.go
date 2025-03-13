@@ -38,8 +38,8 @@ func (c *MerchantClient) GetMerchants(ctx context.Context, params *GetMerchantPa
 		params.Page = defaultPage
 	}
 
-	result, err := c.merchantClient.GetV1Merchant(
-		&merchants.GetV1MerchantParams{
+	result, err := c.merchantClient.GetAPIV10Merchant(
+		&merchants.GetAPIV10MerchantParams{
 			CHANNELID:   params.ChannelID,
 			XEXTERNALID: params.ExternalID,
 			Limit:       &params.Limit,
@@ -61,8 +61,8 @@ type GetMerchantByRefParams struct {
 }
 
 func (c *MerchantClient) GetMerchantByRef(ctx context.Context, params *GetMerchantByRefParams) (*models.MerchantResponse, error) {
-	result, err := c.merchantClient.GetV1MerchantMerchantRef(
-		&merchants.GetV1MerchantMerchantRefParams{
+	result, err := c.merchantClient.GetAPIV10MerchantMerchantRef(
+		&merchants.GetAPIV10MerchantMerchantRefParams{
 			XEXTERNALID: params.ExternalID,
 			CHANNELID:   params.ChannelID,
 			MerchantRef: params.MerchantRef,
@@ -84,8 +84,8 @@ type CreateMerchantParams struct {
 }
 
 func (c *MerchantClient) CreateMerchant(ctx context.Context, params *CreateMerchantParams) (*models.MerchantResponse, error) {
-	result, err := c.merchantClient.PostV1Merchant(
-		&merchants.PostV1MerchantParams{
+	result, err := c.merchantClient.PostAPIV10Merchant(
+		&merchants.PostAPIV10MerchantParams{
 			Request: &models.CreateMerchantRequest{
 				BusinessName: &params.BusinessName,
 				Name:         &params.Name,
