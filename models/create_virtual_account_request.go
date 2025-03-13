@@ -20,7 +20,7 @@ type CreateVirtualAccountRequest struct {
 
 	// Object with more details
 	AdditionalInfo struct {
-		GenericVirtualAccountAdditionalInfo
+		Apiv1GenericVirtualAccountAdditionalInfo
 	} `json:"additionalInfo,omitempty"`
 
 	// Nomor untuk VA
