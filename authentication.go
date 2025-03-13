@@ -46,7 +46,7 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
             return "", err
         }
 
-        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"http"})
+        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"https", "http"})
         authService := client.New(transport, strfmt.Default).Authentication
 
         resp, err := authService.AccessToken(&authentication.AccessTokenParams{
@@ -56,8 +56,6 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
             Request: &models.PartnerAccessTokenRequest{
                 GrantType: "client_credentials",
             },
-        }, func(op *runtime.ClientOperation) {
-            op.Schemes = []string{"http"}
         })
 
         if err != nil {
