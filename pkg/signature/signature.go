@@ -11,6 +11,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
+	"net/http"
 	"strings"
 	"time"
 
@@ -34,13 +35,16 @@ func GenerateSNAPSymmetricSignature(httpMethod, endpointUrl, accessToken, client
 	r := bytes.NewBuffer(body)
 	var w bytes.Buffer
 
-	if err := minify.Minify(nil, &w, r, nil); err != nil {
-		return "", err
+	var datahashString string
+	if strings.EqualFold(httpMethod, http.MethodGet) {
+		datahashString = ""
+	} else {
+		if err := minify.Minify(nil, &w, r, nil); err != nil {
+			return "", err
+		}
+		datahash := sha256.Sum256(w.Bytes())
+		datahashString = strings.ToLower(hex.EncodeToString(datahash[:]))
 	}
-
-	datahash := sha256.Sum256(w.Bytes())
-
-	datahashString := strings.ToLower(hex.EncodeToString(datahash[:]))
 
 	stringToSign := fmt.Sprintf("%s:%s:%s:%s:%s",
 		strings.ToTitle(httpMethod),

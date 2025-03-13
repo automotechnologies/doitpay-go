@@ -46,7 +46,7 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
             return "", err
         }
 
-        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"https", "http"})
+        transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"http"})
         authService := client.New(transport, strfmt.Default).Authentication
 
         resp, err := authService.AccessToken(&authentication.AccessTokenParams{
@@ -95,10 +95,15 @@ func (a *DoitpayAuth) AuthenticateRequest(req runtime.ClientRequest, reg strfmt.
         return err
     }
 
+    endpoint := req.GetPath()
+    if params := req.GetQueryParams(); len(params) > 0 {
+        endpoint = endpoint + "?" + params.Encode()
+    }
+
     // Generate signature
     signature, err := signature.GenerateSNAPSymmetricSignature(
         req.GetMethod(),
-        req.GetPath(),
+        endpoint,
         accessToken,
         a.config.ClientSecret,
         timestamp,
