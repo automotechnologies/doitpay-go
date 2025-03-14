@@ -25,9 +25,7 @@ func NewSimulateClient(client public_simulate.ClientService) *SimulateClient {
 func (c *SimulateClient) SimulateQrisPayment(ctx context.Context, params *SimulateQRISParams) (*public_simulate.SimulatePaymentOK, error) {
 	res, err := c.simulate.SimulatePayment(&public_simulate.SimulatePaymentParams{
 		Request: params.Request,
-	},
-		nil,
-	)
+	})
 	if err != nil {
 		return nil, err
 	}
