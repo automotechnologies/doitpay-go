@@ -153,3 +153,8 @@ func (c *DoitpayClient) Merchant() *MerchantClient {
 func (c *DoitpayClient) VirtualAccount() *VirtualAccountClient {
 	return c.virtualAccount
 }
+
+// Authenticate return the Authenticate instance
+func (c *DoitpayClient) Authenticate() *VirtualAccountClient {
+	return c.Authenticate()
+}
