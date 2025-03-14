@@ -74,8 +74,13 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 	}
 
 	// validate privateKeyPath
-	if _, err := os.Stat(privateKeyPath); os.IsNotExist(err) {
-		return nil, fmt.Errorf("private key file does not exist: %s", privateKeyPath)
+	privateKeyBytes := []byte(privateKeyPath)
+	if _, err := os.Stat(privateKeyPath); os.IsExist(err) {
+		// read private key
+		privateKeyBytes, err = os.ReadFile(privateKeyPath)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read private key: %s", err)
+		}
 	}
 
 	// read private key
