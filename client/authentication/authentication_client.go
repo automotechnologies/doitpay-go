@@ -82,6 +82,7 @@ func (a *Client) AccessToken(params *AccessTokenParams, opts ...ClientOption) (*
 		Reader:             &AccessTokenReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
+
 	}
 	for _, opt := range opts {
 		opt(op)

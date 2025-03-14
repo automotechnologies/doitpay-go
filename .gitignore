@@ -27,3 +27,4 @@ _testmain.go
 .travis.yml
 api
 git_push.sh
+vendor
