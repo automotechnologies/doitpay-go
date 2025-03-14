@@ -83,12 +83,6 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 		}
 	}
 
-	// read private key
-	privateKeyBytes, err := os.ReadFile(privateKeyPath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read private key: %s", err)
-	}
-
 	// parse private key
 	privatePem, _ := pem.Decode(privateKeyBytes)
 	if privatePem == nil {
