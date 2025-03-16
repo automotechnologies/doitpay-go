@@ -56,38 +56,38 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteV1VirtualAccount(params *DeleteV1VirtualAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteV1VirtualAccountOK, error)
+	DeleteVaV10TransferVaDeleteVa(params *DeleteVaV10TransferVaDeleteVaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVaV10TransferVaDeleteVaOK, error)
 
-	PostV1VirtualAccount(params *PostV1VirtualAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1VirtualAccountOK, error)
+	PostVaV10TransferVaCreateVa(params *PostVaV10TransferVaCreateVaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostVaV10TransferVaCreateVaOK, error)
 
-	PostV1VirtualAccountInquiry(params *PostV1VirtualAccountInquiryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1VirtualAccountInquiryOK, error)
+	PostVaV10TransferVaInquiry(params *PostVaV10TransferVaInquiryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostVaV10TransferVaInquiryOK, error)
 
-	PostV1VirtualAccountPaymentStatus(params *PostV1VirtualAccountPaymentStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1VirtualAccountPaymentStatusOK, error)
+	PostVaV10TransferVaStatus(params *PostVaV10TransferVaStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostVaV10TransferVaStatusOK, error)
 
-	PutV1VirtualAccount(params *PutV1VirtualAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutV1VirtualAccountOK, error)
+	PutVaV10TransferVaUpdateVa(params *PutVaV10TransferVaUpdateVaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutVaV10TransferVaUpdateVaOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-DeleteV1VirtualAccount deletes virtual account
+DeleteVaV10TransferVaDeleteVa deletes virtual account
 
 Deletes an existing virtual account
 */
-func (a *Client) DeleteV1VirtualAccount(params *DeleteV1VirtualAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteV1VirtualAccountOK, error) {
+func (a *Client) DeleteVaV10TransferVaDeleteVa(params *DeleteVaV10TransferVaDeleteVaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVaV10TransferVaDeleteVaOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteV1VirtualAccountParams()
+		params = NewDeleteVaV10TransferVaDeleteVaParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "DeleteV1VirtualAccount",
+		ID:                 "DeleteVaV10TransferVaDeleteVa",
 		Method:             "DELETE",
-		PathPattern:        "/v1/virtual-account",
+		PathPattern:        "/va/v1.0/transfer-va/delete-va",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteV1VirtualAccountReader{formats: a.formats},
+		Reader:             &DeleteVaV10TransferVaDeleteVaReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -100,35 +100,35 @@ func (a *Client) DeleteV1VirtualAccount(params *DeleteV1VirtualAccountParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteV1VirtualAccountOK)
+	success, ok := result.(*DeleteVaV10TransferVaDeleteVaOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteV1VirtualAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for DeleteVaV10TransferVaDeleteVa: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PostV1VirtualAccount creates a virtual account
+PostVaV10TransferVaCreateVa creates a virtual account
 
 Creates a new virtual account for payment collection
 */
-func (a *Client) PostV1VirtualAccount(params *PostV1VirtualAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1VirtualAccountOK, error) {
+func (a *Client) PostVaV10TransferVaCreateVa(params *PostVaV10TransferVaCreateVaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostVaV10TransferVaCreateVaOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostV1VirtualAccountParams()
+		params = NewPostVaV10TransferVaCreateVaParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostV1VirtualAccount",
+		ID:                 "PostVaV10TransferVaCreateVa",
 		Method:             "POST",
-		PathPattern:        "/v1/virtual-account",
+		PathPattern:        "/va/v1.0/transfer-va/create-va",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostV1VirtualAccountReader{formats: a.formats},
+		Reader:             &PostVaV10TransferVaCreateVaReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -141,35 +141,35 @@ func (a *Client) PostV1VirtualAccount(params *PostV1VirtualAccountParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostV1VirtualAccountOK)
+	success, ok := result.(*PostVaV10TransferVaCreateVaOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1VirtualAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PostVaV10TransferVaCreateVa: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PostV1VirtualAccountInquiry inquiries virtual account
+PostVaV10TransferVaInquiry inquiries virtual account
 
 Get details of an existing virtual account
 */
-func (a *Client) PostV1VirtualAccountInquiry(params *PostV1VirtualAccountInquiryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1VirtualAccountInquiryOK, error) {
+func (a *Client) PostVaV10TransferVaInquiry(params *PostVaV10TransferVaInquiryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostVaV10TransferVaInquiryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostV1VirtualAccountInquiryParams()
+		params = NewPostVaV10TransferVaInquiryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostV1VirtualAccountInquiry",
+		ID:                 "PostVaV10TransferVaInquiry",
 		Method:             "POST",
-		PathPattern:        "/v1/virtual-account/inquiry",
+		PathPattern:        "/va/v1.0/transfer-va/inquiry",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostV1VirtualAccountInquiryReader{formats: a.formats},
+		Reader:             &PostVaV10TransferVaInquiryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -182,35 +182,35 @@ func (a *Client) PostV1VirtualAccountInquiry(params *PostV1VirtualAccountInquiry
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostV1VirtualAccountInquiryOK)
+	success, ok := result.(*PostVaV10TransferVaInquiryOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1VirtualAccountInquiry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PostVaV10TransferVaInquiry: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PostV1VirtualAccountPaymentStatus checks virtual account payment status
+PostVaV10TransferVaStatus checks virtual account payment status
 
 Check the payment status of a virtual account
 */
-func (a *Client) PostV1VirtualAccountPaymentStatus(params *PostV1VirtualAccountPaymentStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostV1VirtualAccountPaymentStatusOK, error) {
+func (a *Client) PostVaV10TransferVaStatus(params *PostVaV10TransferVaStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostVaV10TransferVaStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostV1VirtualAccountPaymentStatusParams()
+		params = NewPostVaV10TransferVaStatusParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostV1VirtualAccountPaymentStatus",
+		ID:                 "PostVaV10TransferVaStatus",
 		Method:             "POST",
-		PathPattern:        "/v1/virtual-account/payment-status",
+		PathPattern:        "/va/v1.0/transfer-va/status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostV1VirtualAccountPaymentStatusReader{formats: a.formats},
+		Reader:             &PostVaV10TransferVaStatusReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -223,35 +223,35 @@ func (a *Client) PostV1VirtualAccountPaymentStatus(params *PostV1VirtualAccountP
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostV1VirtualAccountPaymentStatusOK)
+	success, ok := result.(*PostVaV10TransferVaStatusOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostV1VirtualAccountPaymentStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PostVaV10TransferVaStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PutV1VirtualAccount updates virtual account
+PutVaV10TransferVaUpdateVa updates virtual account
 
 Updates an existing virtual account's details
 */
-func (a *Client) PutV1VirtualAccount(params *PutV1VirtualAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutV1VirtualAccountOK, error) {
+func (a *Client) PutVaV10TransferVaUpdateVa(params *PutVaV10TransferVaUpdateVaParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutVaV10TransferVaUpdateVaOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPutV1VirtualAccountParams()
+		params = NewPutVaV10TransferVaUpdateVaParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PutV1VirtualAccount",
+		ID:                 "PutVaV10TransferVaUpdateVa",
 		Method:             "PUT",
-		PathPattern:        "/v1/virtual-account",
+		PathPattern:        "/va/v1.0/transfer-va/update-va",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PutV1VirtualAccountReader{formats: a.formats},
+		Reader:             &PutVaV10TransferVaUpdateVaReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -264,13 +264,13 @@ func (a *Client) PutV1VirtualAccount(params *PutV1VirtualAccountParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PutV1VirtualAccountOK)
+	success, ok := result.(*PutVaV10TransferVaUpdateVaOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PutV1VirtualAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PutVaV10TransferVaUpdateVa: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
