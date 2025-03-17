@@ -53,7 +53,7 @@ func ParsePrivateKey(private []byte) (*rsa.PrivateKey, error) {
 }
 
 func main() {
-	dtp, err := doitpay.NewClient("01J20VM8TNRK9VBMGJAQDBSF8X", "01J20VM8W11EP9M6KBHHJZMHPW", PrivateKeyPath, doitpay.WithHost("localhost:8000"))
+	dtp, err := doitpay.NewClient("01J20VM8TNRK9VBMGJAQDBSF8X", "01J20VM8W11EP9M6KBHHJZMHPW", doitpay.WithPrivateKeyPath(PrivateKeyPath), doitpay.WithHost("localhost:8000"))
 	if err != nil {
 		log.Fatalf("Failed to create DTP client: %v", err)
 	}

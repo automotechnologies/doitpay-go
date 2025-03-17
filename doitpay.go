@@ -23,6 +23,22 @@ func WithHost(host string) ClientOption {
 	}
 }
 
+// WithPrivateKeyPath sets a custom private key path
+func WithPrivateKeyPath(privateKeyPath string) ClientOption {
+	return func(c *ClientConfig) {
+		c.privateKeyPath = privateKeyPath
+	}
+}
+
+// WithPrivateKeyBytes sets a custom private key bytes
+func WithPrivateKeyBytes(privateKeyBytes []byte) ClientOption {
+	return func(c *ClientConfig) {
+		c.privateKeyBytes = privateKeyBytes
+	}
+}
+
+
+
 // WithBasePath sets a custom base path
 func WithBasePath(basePath string) ClientOption {
 	return func(c *ClientConfig) {
@@ -57,10 +73,12 @@ type ClientConfig struct {
 	ClientSecret string
 	PartnerID    string
 	PrivateKey   *rsa.PrivateKey
+	privateKeyPath string
+	privateKeyBytes []byte
 }
 
 // NewClient creates a new authenticated client with optional configurations
-func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOption) (*DoitpayClient, error) {
+func NewClient(partnerID, clientSecret string,  opts ...ClientOption) (*DoitpayClient, error) {
 	// Start with default config
 	cfg := DefaultConfig()
 
@@ -73,14 +91,18 @@ func NewClient(partnerID, clientSecret, privateKeyPath string, opts ...ClientOpt
 		opt(&cfg)
 	}
 
-	// validate privateKeyPath
-	privateKeyBytes := []byte(privateKeyPath)
-	if _, err := os.Stat(privateKeyPath); os.IsExist(err) {
+	// validate privateKey, priorities privateKeyPath
+	var privateKeyBytes []byte
+	if _, err := os.Stat(cfg.privateKeyPath); !os.IsNotExist(err) {
 		// read private key
-		privateKeyBytes, err = os.ReadFile(privateKeyPath)
+		privateKeyBytes, err = os.ReadFile(cfg.privateKeyPath)
 		if err != nil {
 			return nil, fmt.Errorf("failed to read private key: %s", err)
 		}
+	} else if cfg.privateKeyBytes != nil {
+		privateKeyBytes = cfg.privateKeyBytes
+	} else {
+		return nil, fmt.Errorf("private key is not set. Please set private key path or private key bytes with WithPrivateKeyPath or WithPrivateKeyBytes")
 	}
 
 	// parse private key
