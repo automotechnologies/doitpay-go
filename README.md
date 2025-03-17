@@ -2,7 +2,7 @@
 
 The official Doitpay Go SDK offers an easy and user-friendly method to access Doitpay's REST API in applications coded in Go.
 
-* Package version: 0.9.3
+* Package version: 1.0.0
 
 # Getting Started
 
@@ -11,24 +11,24 @@ The official Doitpay Go SDK offers an easy and user-friendly method to access Do
 Install doitpay-go in your Go application:
 
 ```shell
-go get github.com/automotechnologies/doitpay-go/v2
+go get github.com/automotechnologies/doitpay-go
 ```
 
 Place the package in your project directory and include the following in the import:
 
 ```golang
-import doitpay "github.com/automotechnologies/doitpay-go/v2"
+import doitpay "github.com/automotechnologies/doitpay-go"
 ```
 
 ## Authorization
 
-To utilize the SDK, initialize it with your client key, partner ID, and private key path. You can get these credentials from the [Doitpay Dashboard](https://dashboard.doitpay.co). If you haven't, you can register for a free Dashboard account [here](https://dashboard.doitpay.co/register).
+To utilize the SDK, initialize it with your client key and partner ID. You can get these credentials from the [Doitpay Dashboard](https://dashboard.doitpay.co). If you haven't, you can register for a free Dashboard account [here](https://dashboard.doitpay.co/register).
 
 ```golang
 dtp, err := doitpay.NewClient(
-    "YOUR_CLIENT_KEY",
     "YOUR_PARTNER_ID",
-    "path/to/private_key.pem",
+    "YOUR_CLIENT_SECRET",
+    doitpay.WithPrivateKeyPath("path/to/private/key.pem"), //  specify private key path or private key bytes
     doitpay.WithHost("api.doitpay.co"), // Optional: specify host
 )
 if err != nil {
@@ -43,8 +43,8 @@ if err != nil {
 ```golang
 import (
     "context"
-    "github.com/automotechnologies/doitpay-go/v2"
-    "github.com/automotechnologies/doitpay-go/v2/models"
+    "github.com/automotechnologies/doitpay-go"
+    "github.com/automotechnologies/doitpay-go/models"
     "github.com/oklog/ulid"
     "time"
 )
