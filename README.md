@@ -2,7 +2,7 @@
 
 The official Doitpay Go SDK offers an easy and user-friendly method to access Doitpay's REST API in applications coded in Go.
 
-* Package version: 1.0.0
+* Package version: 0.9.5
 
 # Getting Started
 
