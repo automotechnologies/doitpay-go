@@ -3,13 +3,14 @@ package doitpay
 import (
 	"bytes"
 	"context"
-	"github.com/pkg/errors"
 	"io"
 	"net/http"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/pkg/errors"
 
 	"github.com/automotechnologies/doitpay-go/client"
 	"github.com/automotechnologies/doitpay-go/client/authentication"
@@ -62,7 +63,7 @@ func (a *DoitpayAuth) GetAccessToken(ctx context.Context) (string, error) {
 			return "", err
 		}
 
-		transport := httptransport.New(a.config.Host, a.config.BasePath, []string{"https", "http"})
+		transport := httptransport.New(a.config.Host, a.config.BasePath, []string{a.config.Scheme})
 		authService := client.New(transport, strfmt.Default).Authentication
 
 		resp, err := authService.AccessToken(&authentication.AccessTokenParams{

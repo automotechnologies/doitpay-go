@@ -38,11 +38,17 @@ func WithPrivateKeyBytes(privateKeyBytes []byte) ClientOption {
 }
 
 
-
 // WithBasePath sets a custom base path
 func WithBasePath(basePath string) ClientOption {
 	return func(c *ClientConfig) {
 		c.BasePath = basePath
+	}
+}
+
+// WithScheme sets a custom scheme
+func WithScheme(scheme string) ClientOption {
+	return func(c *ClientConfig) {
+		c.Scheme = scheme
 	}
 }
 
@@ -75,6 +81,7 @@ type ClientConfig struct {
 	PrivateKey   *rsa.PrivateKey
 	privateKeyPath string
 	privateKeyBytes []byte
+	Scheme string
 }
 
 // NewClient creates a new authenticated client with optional configurations
@@ -111,6 +118,11 @@ func NewClient(partnerID, clientSecret string,  opts ...ClientOption) (*DoitpayC
 		return nil, fmt.Errorf("failed to decode private key")
 	}
 
+	// validate scheme
+	if cfg.Scheme == "" {
+		cfg.Scheme = "https"
+	}
+
 	if privatePem.Type != "RSA PRIVATE KEY" && privatePem.Type != "ENCRYPTED PRIVATE KEY" && privatePem.Type != "PRIVATE KEY" {
 		return nil, fmt.Errorf("private key is not a valid PEM file")
 	}
@@ -127,7 +139,7 @@ func NewClient(partnerID, clientSecret string,  opts ...ClientOption) (*DoitpayC
 	cfg.PrivateKey = rsaPrivateKey
 
 	// Create transport with auth
-	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{"https", "http"})
+	transport := httptransport.New(cfg.Host, cfg.BasePath, []string{cfg.Scheme})
 
 	// Need to use default authentication that follows SNAP flows.
 	transport.DefaultAuthentication = NewDoitpayAuth(cfg)
