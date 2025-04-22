@@ -191,6 +191,6 @@ func (c *DoitpayClient) VirtualAccount() *VirtualAccountClient {
 }
 
 // Authenticate return the Authenticate instance
-func (c *DoitpayClient) Authenticate() *VirtualAccountClient {
-	return c.Authenticate()
+func (c *DoitpayClient) Payment() *PaymentClient {
+	return c.payment
 }
