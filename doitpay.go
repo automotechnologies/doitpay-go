@@ -37,7 +37,6 @@ func WithPrivateKeyBytes(privateKeyBytes []byte) ClientOption {
 	}
 }
 
-
 // WithBasePath sets a custom base path
 func WithBasePath(basePath string) ClientOption {
 	return func(c *ClientConfig) {
@@ -71,21 +70,22 @@ type DoitpayClient struct {
 	simulate       *SimulateClient
 	merchant       *MerchantClient
 	virtualAccount *VirtualAccountClient
+	payment        *PaymentClient
 }
 
 type ClientConfig struct {
-	Host         string
-	BasePath     string
-	ClientSecret string
-	PartnerID    string
-	PrivateKey   *rsa.PrivateKey
-	privateKeyPath string
+	Host            string
+	BasePath        string
+	ClientSecret    string
+	PartnerID       string
+	PrivateKey      *rsa.PrivateKey
+	privateKeyPath  string
 	privateKeyBytes []byte
-	Scheme string
+	Scheme          string
 }
 
 // NewClient creates a new authenticated client with optional configurations
-func NewClient(partnerID, clientSecret string,  opts ...ClientOption) (*DoitpayClient, error) {
+func NewClient(partnerID, clientSecret string, opts ...ClientOption) (*DoitpayClient, error) {
 	// Start with default config
 	cfg := DefaultConfig()
 
@@ -152,6 +152,7 @@ func NewClient(partnerID, clientSecret string,  opts ...ClientOption) (*DoitpayC
 	simulateClient := NewSimulateClient(baseClient.PublicSimulate)
 	merchant := NewMerchantClient(baseClient.Merchants)
 	virtualAccount := NewVirtualAccountClient(baseClient.VirtualAccount)
+	paymentClient := NewPaymentClient(baseClient.Payment)
 	return &DoitpayClient{
 		doitpay:        baseClient,
 		config:         cfg,
@@ -160,6 +161,7 @@ func NewClient(partnerID, clientSecret string,  opts ...ClientOption) (*DoitpayC
 		simulate:       simulateClient,
 		merchant:       merchant,
 		virtualAccount: virtualAccount,
+		payment:        paymentClient,
 	}, nil
 }
 
