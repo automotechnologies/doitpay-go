@@ -3,45 +3,45 @@ package doitpay
 import (
 	"context"
 
-	"github.com/automotechnologies/doitpay-go/client/payment"
+	"github.com/automotechnologies/doitpay-go/client/debit"
 	"github.com/automotechnologies/doitpay-go/models"
 )
 
 // Parameter structs
-type CreatePaymentParams struct {
+type PaymentHostToHostParams struct {
 	Request    *models.CreateEwalletRequest
 	ExternalID string
 	ChannelID  string
 	RequestID  string
 }
 
-type CancelPaymentParams struct {
+type CancelParams struct {
 	Request    *models.CancelHostToHostPaymentRequest
 	ExternalID string
 	ChannelID  string
 }
 
-type CheckPaymentStatusParams struct {
+type StatusParams struct {
 	Request    *models.CheckPaymentStatusEwalletRequest
 	ExternalID string
 	ChannelID  string
 	RequestID  string
 }
 
-type PaymentClient struct {
-	paymentClient payment.ClientService
+type DebitClient struct {
+	debitClient debit.ClientService
 }
 
-func NewPaymentClient(clientService payment.ClientService) *PaymentClient {
-	return &PaymentClient{
-		paymentClient: clientService,
+func NewDebitClient(clientService debit.ClientService) *DebitClient {
+	return &DebitClient{
+		debitClient: clientService,
 	}
 }
 
 // Create creates a new payment transaction
-func (c *PaymentClient) Create(ctx context.Context, params *CreatePaymentParams) (*models.CreateEwalletResponse, error) {
-	result, err := c.paymentClient.PostPaymentV10PaymentHostToHost(
-		&payment.PostPaymentV10PaymentHostToHostParams{
+func (c *DebitClient) PaymentHostToHost(ctx context.Context, params *PaymentHostToHostParams) (*models.CreateEwalletResponse, error) {
+	result, err := c.debitClient.PostAPIDebitV10PaymentHostToHost(
+		&debit.PostAPIDebitV10PaymentHostToHostParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
 			CHANNELID:   params.ChannelID,
@@ -57,9 +57,9 @@ func (c *PaymentClient) Create(ctx context.Context, params *CreatePaymentParams)
 }
 
 // Cancel cancels an existing payment transaction
-func (c *PaymentClient) Cancel(ctx context.Context, params *CancelPaymentParams) (*models.CancelHostToHostPaymentResponse, error) {
-	result, err := c.paymentClient.PostPaymentV10PaymentHostToHostCancel(
-		&payment.PostPaymentV10PaymentHostToHostCancelParams{
+func (c *DebitClient) Cancel(ctx context.Context, params *CancelParams) (*models.CancelHostToHostPaymentResponse, error) {
+	result, err := c.debitClient.PostAPIV10DebitCancel(
+		&debit.PostAPIV10DebitCancelParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
 			CHANNELID:   params.ChannelID,
@@ -73,10 +73,10 @@ func (c *PaymentClient) Cancel(ctx context.Context, params *CancelPaymentParams)
 	return result.Payload, nil
 }
 
-// GetStatus checks the status of a payment transaction
-func (c *PaymentClient) GetStatus(ctx context.Context, params *CheckPaymentStatusParams) (*models.CheckPaymentStatusEwalletResponse, error) {
-	result, err := c.paymentClient.PostPaymentV10PaymentHostToHostStatus(
-		&payment.PostPaymentV10PaymentHostToHostStatusParams{
+// Status checks the status of a payment transaction
+func (c *DebitClient) Status(ctx context.Context, params *StatusParams) (*models.CheckPaymentStatusEwalletResponse, error) {
+	result, err := c.debitClient.PostAPIV10DebitStatus(
+		&debit.PostAPIV10DebitStatusParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
 			CHANNELID:   params.ChannelID,
@@ -90,4 +90,3 @@ func (c *PaymentClient) GetStatus(ctx context.Context, params *CheckPaymentStatu
 	}
 	return result.Payload, nil
 }
-

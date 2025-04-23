@@ -70,7 +70,7 @@ type DoitpayClient struct {
 	simulate       *SimulateClient
 	merchant       *MerchantClient
 	virtualAccount *VirtualAccountClient
-	payment        *PaymentClient
+	debit          *DebitClient
 }
 
 type ClientConfig struct {
@@ -152,7 +152,7 @@ func NewClient(partnerID, clientSecret string, opts ...ClientOption) (*DoitpayCl
 	simulateClient := NewSimulateClient(baseClient.PublicSimulate)
 	merchant := NewMerchantClient(baseClient.Merchants)
 	virtualAccount := NewVirtualAccountClient(baseClient.VirtualAccount)
-	paymentClient := NewPaymentClient(baseClient.Payment)
+	debitClient := NewDebitClient(baseClient.Debit)
 	return &DoitpayClient{
 		doitpay:        baseClient,
 		config:         cfg,
@@ -161,7 +161,7 @@ func NewClient(partnerID, clientSecret string, opts ...ClientOption) (*DoitpayCl
 		simulate:       simulateClient,
 		merchant:       merchant,
 		virtualAccount: virtualAccount,
-		payment:        paymentClient,
+		debit:          debitClient,
 	}, nil
 }
 
@@ -191,6 +191,6 @@ func (c *DoitpayClient) VirtualAccount() *VirtualAccountClient {
 }
 
 // Authenticate return the Authenticate instance
-func (c *DoitpayClient) Payment() *PaymentClient {
-	return c.payment
+func (c *DoitpayClient) Debit() *DebitClient {
+	return c.debit
 }
