@@ -11,21 +11,16 @@ import (
 type PaymentHostToHostParams struct {
 	Request    *models.CreateEwalletRequest
 	ExternalID string
-	ChannelID  string
-	RequestID  string
 }
 
 type CancelParams struct {
 	Request    *models.CancelHostToHostPaymentRequest
 	ExternalID string
-	ChannelID  string
 }
 
 type StatusParams struct {
 	Request    *models.CheckPaymentStatusEwalletRequest
 	ExternalID string
-	ChannelID  string
-	RequestID  string
 }
 
 type DebitClient struct {
@@ -40,12 +35,10 @@ func NewDebitClient(clientService debit.ClientService) *DebitClient {
 
 // Create creates a new payment transaction
 func (c *DebitClient) PaymentHostToHost(ctx context.Context, params *PaymentHostToHostParams) (*models.CreateEwalletResponse, error) {
-	result, err := c.debitClient.PostAPIDebitV10PaymentHostToHost(
-		&debit.PostAPIDebitV10PaymentHostToHostParams{
+	result, err := c.debitClient.PostAPIV10DebitPaymentHostToHost(
+		&debit.PostAPIV10DebitPaymentHostToHostParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
-			CHANNELID:   params.ChannelID,
-			XREQUESTID:  params.RequestID,
 			Context:     ctx,
 		},
 		nil,
@@ -62,7 +55,6 @@ func (c *DebitClient) Cancel(ctx context.Context, params *CancelParams) (*models
 		&debit.PostAPIV10DebitCancelParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
-			CHANNELID:   params.ChannelID,
 			Context:     ctx,
 		},
 		nil,
@@ -79,8 +71,6 @@ func (c *DebitClient) Status(ctx context.Context, params *StatusParams) (*models
 		&debit.PostAPIV10DebitStatusParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
-			CHANNELID:   params.ChannelID,
-			XREQUESTID:  params.RequestID,
 			Context:     ctx,
 		},
 		nil,
