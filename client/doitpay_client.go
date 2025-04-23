@@ -11,9 +11,9 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/automotechnologies/doitpay-go/client/authentication"
+	"github.com/automotechnologies/doitpay-go/client/debit"
 	"github.com/automotechnologies/doitpay-go/client/disbursement"
 	"github.com/automotechnologies/doitpay-go/client/merchants"
-	"github.com/automotechnologies/doitpay-go/client/payment"
 	"github.com/automotechnologies/doitpay-go/client/public_simulate"
 	"github.com/automotechnologies/doitpay-go/client/q_r_i_s"
 	"github.com/automotechnologies/doitpay-go/client/virtual_account"
@@ -62,9 +62,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Doitpay {
 	cli := new(Doitpay)
 	cli.Transport = transport
 	cli.Authentication = authentication.New(transport, formats)
+	cli.Debit = debit.New(transport, formats)
 	cli.Disbursement = disbursement.New(transport, formats)
 	cli.Merchants = merchants.New(transport, formats)
-	cli.Payment = payment.New(transport, formats)
 	cli.PublicSimulate = public_simulate.New(transport, formats)
 	cli.Qris = q_r_i_s.New(transport, formats)
 	cli.VirtualAccount = virtual_account.New(transport, formats)
@@ -114,11 +114,11 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type Doitpay struct {
 	Authentication authentication.ClientService
 
+	Debit debit.ClientService
+
 	Disbursement disbursement.ClientService
 
 	Merchants merchants.ClientService
-
-	Payment payment.ClientService
 
 	PublicSimulate public_simulate.ClientService
 
@@ -133,9 +133,9 @@ type Doitpay struct {
 func (c *Doitpay) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Authentication.SetTransport(transport)
+	c.Debit.SetTransport(transport)
 	c.Disbursement.SetTransport(transport)
 	c.Merchants.SetTransport(transport)
-	c.Payment.SetTransport(transport)
 	c.PublicSimulate.SetTransport(transport)
 	c.Qris.SetTransport(transport)
 	c.VirtualAccount.SetTransport(transport)
