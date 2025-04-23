@@ -56,54 +56,13 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	PostAPIDebitV10PaymentHostToHost(params *PostAPIDebitV10PaymentHostToHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIDebitV10PaymentHostToHostOK, error)
-
 	PostAPIV10DebitCancel(params *PostAPIV10DebitCancelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIV10DebitCancelOK, error)
+
+	PostAPIV10DebitPaymentHostToHost(params *PostAPIV10DebitPaymentHostToHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIV10DebitPaymentHostToHostOK, error)
 
 	PostAPIV10DebitStatus(params *PostAPIV10DebitStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIV10DebitStatusOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-PostAPIDebitV10PaymentHostToHost creates e wallet or credit card payment
-
-Create a new payment transaction using e-wallet or credit card
-*/
-func (a *Client) PostAPIDebitV10PaymentHostToHost(params *PostAPIDebitV10PaymentHostToHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIDebitV10PaymentHostToHostOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPostAPIDebitV10PaymentHostToHostParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostAPIDebitV10PaymentHostToHost",
-		Method:             "POST",
-		PathPattern:        "/api/debit/v1.0/payment-host-to-host",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostAPIDebitV10PaymentHostToHostReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*PostAPIDebitV10PaymentHostToHostOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostAPIDebitV10PaymentHostToHost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -144,6 +103,47 @@ func (a *Client) PostAPIV10DebitCancel(params *PostAPIV10DebitCancelParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostAPIV10DebitCancel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostAPIV10DebitPaymentHostToHost creates e wallet or credit card payment
+
+Create a new payment transaction using e-wallet or credit card
+*/
+func (a *Client) PostAPIV10DebitPaymentHostToHost(params *PostAPIV10DebitPaymentHostToHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostAPIV10DebitPaymentHostToHostOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostAPIV10DebitPaymentHostToHostParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostAPIV10DebitPaymentHostToHost",
+		Method:             "POST",
+		PathPattern:        "/api/v1.0/debit/payment-host-to-host",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PostAPIV10DebitPaymentHostToHostReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostAPIV10DebitPaymentHostToHostOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostAPIV10DebitPaymentHostToHost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
