@@ -11,16 +11,19 @@ import (
 type PaymentHostToHostParams struct {
 	Request    *models.CreateEwalletRequest
 	ExternalID string
+	ChannelID  string
 }
 
 type CancelParams struct {
 	Request    *models.CancelHostToHostPaymentRequest
 	ExternalID string
+	ChannelID  string
 }
 
 type StatusParams struct {
 	Request    *models.CheckPaymentStatusEwalletRequest
 	ExternalID string
+	ChannelID  string
 }
 
 type DebitClient struct {
@@ -39,6 +42,7 @@ func (c *DebitClient) PaymentHostToHost(ctx context.Context, params *PaymentHost
 		&debit.PostAPIV10DebitPaymentHostToHostParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
+			CHANNELID:   params.ChannelID,
 			Context:     ctx,
 		},
 		nil,
@@ -55,6 +59,7 @@ func (c *DebitClient) Cancel(ctx context.Context, params *CancelParams) (*models
 		&debit.PostAPIV10DebitCancelParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
+			CHANNELID:   params.ChannelID,
 			Context:     ctx,
 		},
 		nil,
@@ -71,6 +76,7 @@ func (c *DebitClient) Status(ctx context.Context, params *StatusParams) (*models
 		&debit.PostAPIV10DebitStatusParams{
 			Request:     params.Request,
 			XEXTERNALID: params.ExternalID,
+			CHANNELID:   params.ChannelID,
 			Context:     ctx,
 		},
 		nil,
