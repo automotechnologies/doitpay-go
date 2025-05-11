@@ -1,10 +1,8 @@
 name: Check External Repo
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ feat/verify-api ]
+    branches: [ main ]
   schedule:
     - cron: '0 12 * * *' # Runs at midnight UTC every day
     - cron: '0 18 * * *' # Runs at 6am UTC every day
