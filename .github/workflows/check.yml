@@ -2,7 +2,7 @@ name: Check External Repo
 
 on:
   push:
-    branches: [ check-open-api ]
+    branches: [ main ]
   pull_request:
     branches: [ check-open-api ]
 
