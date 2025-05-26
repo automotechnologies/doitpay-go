@@ -28,3 +28,4 @@ _testmain.go
 api
 git_push.sh
 vendor
+.peru
