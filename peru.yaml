@@ -1,0 +1,7 @@
+imports:
+  doitpay: doitpay
+
+git module doitpay:
+  url: git+ssh://git@github.com/automotechnologies/doitpay
+  rev: ardin/improve-openapi
+  pick: api/snap/snapApiDocs_swagger.yaml 

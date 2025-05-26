@@ -1,0 +1,52 @@
+name: Check External Repo
+
+on:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 12 * * *' # Runs at midnight UTC every day
+    - cron: '0 18 * * *' # Runs at 6am UTC every day
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Checkout other repository
+        uses: actions/checkout@v4
+        with:
+          repository: automotechnologies/doitpay 
+          path: doitpay-be # TODO: Choose a local path for the other repo
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable' # Or specify a version like '1.21'
+
+      - name: Install go-swagger
+        run: go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+
+      - name: Run the swagger command and check wether there's deviation
+        run: |
+          swagger generate client -f doitpay-be/api/snap/snapApiDocs_swagger.json -A doitpay
+
+          rm -rf doitpay-be
+
+          # Check for uncommitted changes or untracked files
+          echo "Checking for git changes..."
+          # The following command outputs tracked changes and untracked files.
+          # If there's any output, the status check fails.
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Detected uncommitted changes or untracked files after generating client."
+            echo "This usually means the generated client code in the repository is outdated."
+            echo "Please run 'swagger generate client -f <path-to-spec> -A doitpay' locally and commit the changes."
+            git status 
+            git diff 
+            exit 1
+          else
+            echo "Generated client code matches committed version. No changes detected."
+          fi
+
+
